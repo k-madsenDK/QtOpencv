@@ -31,4 +31,4 @@ cmake .
 make
 
 You have to have qt5 on your rpi and cmake working.
-ask copilot hoe to install it if needed.
+ask copilot how to install it if needed.

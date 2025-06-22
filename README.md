@@ -1,23 +1,27 @@
 # QtOpencv
-simpel program that takes a mp4 file combined with a hailo generated text fil and if needed save frames from the video file as jpg with the originale frame
 
-this is intended to bee used with hailo+ hat on a rpi system
+Simple program that takes an MP4 file combined with a Hailo-generated text file and, if needed, saves frames from the video file as JPGs with the original frame.
 
-spacebar start/stop showing the vidio file
-left arrow key is 1 frame back (slow)
-right arrow 1 frame forward
-ctrl+s save current frame as filename+framenumber.jpg
+This is intended to be used with a Hailo+ hat on an RPi system.
 
-You have to have use madsen.py as detection file instead of  detection.py
-This is making the text file.
-python3 basic_pipelines/madsen.py --hef-path resources/yolo11s.hef --input example.mp4 --labels-json resources/madsen.json >>example.txt
+- Spacebar: Start/stop showing the video file
+- Left arrow key: Go back 1 frame (slow)
+- Right arrow key: Move forward 1 frame
+- Ctrl+S: Save the current frame as filename+framenumber.jpg
 
-The filname on the text file hase to be equal to the mp4 file only the extension is differs
+You need to use `madsen.py` as the detection file instead of `detection.py`.  
+This script creates the text file:
 
-start QtOpencv in the directory where you want to save the pictures.
+```bash
+python3 basic_pipelines/madsen.py --hef-path resources/yolo11s.hef --input example.mp4 --labels-json resources/madsen.json >> example.txt
 
-I have made this program for updating my model
-I go true a mp4 file of the object(s) in my model. if the score is low or not pressant I save som pictures and put it in picture file of the model.
-I some cases with my cellphone picture are opsidedown.
-In these casses the boundering box will not be at the right spot but sawing the picture is in the right direction.
+The filename of the text file must be the same as the MP4 file, with only the extension different.
+
+Start QtOpencv in the directory where you want to save the pictures.
+
+I made this program to update my model.
+I go through an MP4 file of the object(s) in my model. If the score is low or not present, I save some pictures and put them in the pictures folder of the model.
+
+In some cases, pictures taken with my cellphone are upside down.
+In these cases, the bounding box will not be in the right spot, but saving the picture is still in the correct orientation.
 

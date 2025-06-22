@@ -12,7 +12,6 @@ This is intended to be used with a Hailo+ hat on an RPi system.
 You need to use `madsen.py` as the detection file instead of `detection.py`.  
 This script creates the text file:
 
-```bash
 python3 basic_pipelines/madsen.py --hef-path resources/yolo11s.hef --input example.mp4 --labels-json resources/madsen.json >> example.txt
 
 The filename of the text file must be the same as the MP4 file, with only the extension different.

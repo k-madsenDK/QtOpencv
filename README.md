@@ -22,6 +22,7 @@ I made this program to update my model.
 I go through an MP4 file of the object(s) in my model. If the score is low or not present, I save some pictures and put them in the pictures folder of the model.
 
 ![Screenshot](QtOpensvscreenshot.png)
+![Screenshot](QtOpensvscreenshot1.png)
 
 In some cases, pictures taken with my cellphone are upside down.
 In these cases, the bounding box will not be in the right spot, but saving the picture is still in the correct orientation.

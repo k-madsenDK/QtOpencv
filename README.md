@@ -24,3 +24,8 @@ I go through an MP4 file of the object(s) in my model. If the score is low or no
 In some cases, pictures taken with my cellphone are upside down.
 In these cases, the bounding box will not be in the right spot, but saving the picture is still in the correct orientation.
 
+to compile it
+cmake .
+make
+You have to have qt5 on your rpi and cmake working.
+ask copilot hoe to install it if needed.

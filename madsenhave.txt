@@ -1,0 +1,3060 @@
+Auto-detected Hailo architecture: hailo8
+filesrc location="madsenhave.mp4" name=source ! queue name=source_queue_decode leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! decodebin name=source_decodebin !  queue name=source_scale_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! videoscale name=source_videoscale n-threads=2 ! queue name=source_convert_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! videoconvert n-threads=3 name=source_convert qos=false ! video/x-raw, pixel-aspect-ratio=1/1, format=RGB, width=1280, height=720  ! queue name=inference_wrapper_input_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! hailocropper name=inference_wrapper_crop so-path=/usr/lib/aarch64-linux-gnu/hailo/tappas/post_processes/cropping_algorithms/libwhole_buffer.so function-name=create_crops use-letterbox=true resize-method=inter-area internal-offset=true hailoaggregator name=inference_wrapper_agg inference_wrapper_crop. ! queue name=inference_wrapper_bypass_q leaky=no max-size-buffers=20 max-size-bytes=0 max-size-time=0  ! inference_wrapper_agg.sink_0 inference_wrapper_crop. ! queue name=inference_scale_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! videoscale name=inference_videoscale n-threads=2 qos=false ! queue name=inference_convert_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! video/x-raw, pixel-aspect-ratio=1/1 ! videoconvert name=inference_videoconvert n-threads=2 ! queue name=inference_hailonet_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! hailonet name=inference_hailonet hef-path=resources/110625-1.hef batch-size=2  vdevice-group-id=1 nms-score-threshold=0.3 nms-iou-threshold=0.45 output-format-type=HAILO_FORMAT_TYPE_FLOAT32 force-writable=true  ! queue name=inference_hailofilter_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! hailofilter name=inference_hailofilter so-path=/home/hailo/Documents/hailo/hailo-rpi5-examples/venv_hailo_rpi5_examples/lib/python3.11/site-packages/hailo_apps_infra/../resources/libyolo_hailortpp_postprocess.so  config-path=resources/madsen.json   function-name=filter_letterbox  qos=false ! queue name=inference_output_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0   ! inference_wrapper_agg.sink_1 inference_wrapper_agg. ! queue name=inference_wrapper_output_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0   ! hailotracker name=hailo_tracker class-id=1 kalman-dist-thr=0.8 iou-thr=0.9 init-iou-thr=0.7 keep-new-frames=2 keep-tracked-frames=15 keep-lost-frames=2 keep-past-metadata=False qos=False ! queue name=hailo_tracker_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0   ! queue name=identity_callback_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! identity name=identity_callback  ! queue name=hailo_display_overlay_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! hailooverlay name=hailo_display_overlay  ! queue name=hailo_display_videoconvert_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! videoconvert name=hailo_display_videoconvert n-threads=2 qos=false ! queue name=hailo_display_q leaky=no max-size-buffers=3 max-size-bytes=0 max-size-time=0  ! fpsdisplaysink name=hailo_display video-sink=autovideosink sync=true text-overlay=False signal-fps-measurements=true 
+Frame count: 1 Width: 1280 Heigth: 720
+
+Frame count: 2 Width: 1280 Heigth: 720
+
+Frame count: 3 Width: 1280 Heigth: 720
+
+Frame count: 4 Width: 1280 Heigth: 720
+
+Frame count: 5 Width: 1280 Heigth: 720
+
+Frame count: 6 Width: 1280 Heigth: 720
+
+Frame count: 7 Width: 1280 Heigth: 720
+
+Frame count: 8 Width: 1280 Heigth: 720
+
+Frame count: 9 Width: 1280 Heigth: 720
+
+Frame count: 10 Width: 1280 Heigth: 720
+
+Frame count: 11 Width: 1280 Heigth: 720
+
+Frame count: 12 Width: 1280 Heigth: 720
+
+Frame count: 13 Width: 1280 Heigth: 720
+
+Frame count: 14 Width: 1280 Heigth: 720
+
+Frame count: 15 Width: 1280 Heigth: 720
+
+Frame count: 16 Width: 1280 Heigth: 720
+
+Frame count: 17 Width: 1280 Heigth: 720
+
+Frame count: 18 Width: 1280 Heigth: 720
+
+Frame count: 19 Width: 1280 Heigth: 720
+
+Frame count: 20 Width: 1280 Heigth: 720
+
+Frame count: 21 Width: 1280 Heigth: 720
+
+Frame count: 22 Width: 1280 Heigth: 720
+
+Frame count: 23 Width: 1280 Heigth: 720
+
+Frame count: 24 Width: 1280 Heigth: 720
+
+Frame count: 25 Width: 1280 Heigth: 720
+
+Frame count: 26 Width: 1280 Heigth: 720
+
+Frame count: 27 Width: 1280 Heigth: 720
+
+Frame count: 28 Width: 1280 Heigth: 720
+
+Frame count: 29 Width: 1280 Heigth: 720
+
+Frame count: 30 Width: 1280 Heigth: 720
+
+Frame count: 31 Width: 1280 Heigth: 720
+
+Frame count: 32 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.76 Detection count: 1 Position: center=(0.4625, 0.5441) Bounds: xmin=0.2858, ymin=0.2873, xmax=0.6392, ymax=0.7474
+
+Frame count: 33 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.70 Detection count: 1 Position: center=(0.4572, 0.5585) Bounds: xmin=0.2745, ymin=0.2950, xmax=0.6399, ymax=0.7554
+
+Frame count: 34 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.69 Detection count: 1 Position: center=(0.4547, 0.5643) Bounds: xmin=0.2694, ymin=0.2911, xmax=0.6400, ymax=0.7656
+
+Frame count: 35 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.78 Detection count: 1 Position: center=(0.4546, 0.5596) Bounds: xmin=0.2686, ymin=0.2896, xmax=0.6405, ymax=0.7620
+
+Frame count: 36 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.4578, 0.5611) Bounds: xmin=0.2766, ymin=0.2912, xmax=0.6390, ymax=0.7620
+
+Frame count: 37 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.4623, 0.5575) Bounds: xmin=0.2884, ymin=0.2911, xmax=0.6363, ymax=0.7582
+
+Frame count: 38 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.68 Detection count: 1 Position: center=(0.4586, 0.5585) Bounds: xmin=0.2824, ymin=0.2955, xmax=0.6348, ymax=0.7549
+
+Frame count: 39 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.66 Detection count: 1 Position: center=(0.4532, 0.5565) Bounds: xmin=0.2727, ymin=0.2919, xmax=0.6338, ymax=0.7564
+
+Frame count: 40 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.44 Detection count: 1 Position: center=(0.4489, 0.5621) Bounds: xmin=0.2713, ymin=0.2858, xmax=0.6265, ymax=0.7685
+
+Frame count: 41 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.49 Detection count: 1 Position: center=(0.4461, 0.5456) Bounds: xmin=0.2721, ymin=0.2616, xmax=0.6201, ymax=0.7747
+
+Frame count: 42 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.65 Detection count: 1 Position: center=(0.4437, 0.5207) Bounds: xmin=0.2748, ymin=0.2598, xmax=0.6126, ymax=0.7493
+
+Frame count: 43 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.62 Detection count: 1 Position: center=(0.4431, 0.5008) Bounds: xmin=0.2766, ymin=0.2601, xmax=0.6095, ymax=0.7273
+
+Frame count: 44 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.70 Detection count: 1 Position: center=(0.4409, 0.5193) Bounds: xmin=0.2780, ymin=0.2541, xmax=0.6038, ymax=0.7535
+
+Frame count: 45 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.67 Detection count: 1 Position: center=(0.4377, 0.5146) Bounds: xmin=0.2809, ymin=0.2497, xmax=0.5945, ymax=0.7527
+
+Frame count: 46 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4392, 0.5097) Bounds: xmin=0.2894, ymin=0.2476, xmax=0.5890, ymax=0.7495
+
+Frame count: 47 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.87 Detection count: 1 Position: center=(0.4403, 0.4922) Bounds: xmin=0.2924, ymin=0.2428, xmax=0.5882, ymax=0.7351
+
+Frame count: 48 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.88 Detection count: 1 Position: center=(0.4421, 0.4668) Bounds: xmin=0.2924, ymin=0.2415, xmax=0.5918, ymax=0.7087
+
+Frame count: 49 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.4517, 0.4566) Bounds: xmin=0.2963, ymin=0.2394, xmax=0.6071, ymax=0.6996
+
+Frame count: 50 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.4517, 0.4566) Bounds: xmin=0.2963, ymin=0.2394, xmax=0.6071, ymax=0.6996
+
+Frame count: 51 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.4517, 0.4566) Bounds: xmin=0.2963, ymin=0.2394, xmax=0.6071, ymax=0.6996
+
+Frame count: 52 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.4517, 0.4566) Bounds: xmin=0.2963, ymin=0.2394, xmax=0.6071, ymax=0.6996
+
+Frame count: 53 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4627, 0.4928) Bounds: xmin=0.3028, ymin=0.2148, xmax=0.6226, ymax=0.7637
+
+Frame count: 54 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.66 Detection count: 1 Position: center=(0.4680, 0.4899) Bounds: xmin=0.3042, ymin=0.2134, xmax=0.6319, ymax=0.7620
+
+Frame count: 55 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.4726, 0.4902) Bounds: xmin=0.3032, ymin=0.2170, xmax=0.6419, ymax=0.7587
+
+Frame count: 56 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.78 Detection count: 1 Position: center=(0.4790, 0.4885) Bounds: xmin=0.3024, ymin=0.2143, xmax=0.6556, ymax=0.7596
+
+Frame count: 57 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.74 Detection count: 1 Position: center=(0.4854, 0.4593) Bounds: xmin=0.3027, ymin=0.2244, xmax=0.6681, ymax=0.7176
+
+Frame count: 58 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.76 Detection count: 1 Position: center=(0.4872, 0.4474) Bounds: xmin=0.3039, ymin=0.2270, xmax=0.6705, ymax=0.7020
+
+Frame count: 59 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.4886, 0.4501) Bounds: xmin=0.3045, ymin=0.2341, xmax=0.6726, ymax=0.6978
+
+Frame count: 60 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.71 Detection count: 1 Position: center=(0.4892, 0.4616) Bounds: xmin=0.3060, ymin=0.2383, xmax=0.6724, ymax=0.7062
+
+Frame count: 61 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4891, 0.4668) Bounds: xmin=0.3066, ymin=0.2375, xmax=0.6716, ymax=0.7127
+
+Frame count: 62 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.65 Detection count: 1 Position: center=(0.4885, 0.4746) Bounds: xmin=0.3068, ymin=0.2386, xmax=0.6703, ymax=0.7202
+
+Frame count: 63 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.82 Detection count: 1 Position: center=(0.4875, 0.4724) Bounds: xmin=0.3057, ymin=0.2422, xmax=0.6693, ymax=0.7140
+
+Frame count: 64 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.4877, 0.4910) Bounds: xmin=0.3061, ymin=0.2426, xmax=0.6694, ymax=0.7340
+
+Frame count: 65 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.81 Detection count: 1 Position: center=(0.4871, 0.4710) Bounds: xmin=0.3038, ymin=0.2493, xmax=0.6703, ymax=0.7055
+
+Frame count: 66 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.81 Detection count: 1 Position: center=(0.4871, 0.4710) Bounds: xmin=0.3038, ymin=0.2493, xmax=0.6703, ymax=0.7055
+
+Frame count: 67 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.53 Detection count: 1 Position: center=(0.4830, 0.4923) Bounds: xmin=0.2958, ymin=0.2417, xmax=0.6702, ymax=0.7363
+
+Frame count: 68 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.53 Detection count: 1 Position: center=(0.4830, 0.4923) Bounds: xmin=0.2958, ymin=0.2417, xmax=0.6702, ymax=0.7363
+
+Frame count: 69 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.41 Detection count: 1 Position: center=(0.4818, 0.4967) Bounds: xmin=0.2946, ymin=0.2400, xmax=0.6691, ymax=0.7428
+
+Frame count: 70 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.41 Detection count: 1 Position: center=(0.4818, 0.4967) Bounds: xmin=0.2946, ymin=0.2400, xmax=0.6691, ymax=0.7428
+
+Frame count: 71 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.41 Detection count: 1 Position: center=(0.4818, 0.4967) Bounds: xmin=0.2946, ymin=0.2400, xmax=0.6691, ymax=0.7428
+
+Frame count: 72 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.72 Detection count: 1 Position: center=(0.4735, 0.5227) Bounds: xmin=0.2833, ymin=0.2299, xmax=0.6636, ymax=0.7813
+
+Frame count: 73 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.70 Detection count: 1 Position: center=(0.4671, 0.5410) Bounds: xmin=0.2810, ymin=0.2425, xmax=0.6532, ymax=0.7888
+
+Frame count: 74 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.70 Detection count: 1 Position: center=(0.4671, 0.5410) Bounds: xmin=0.2810, ymin=0.2425, xmax=0.6532, ymax=0.7888
+
+Frame count: 75 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.4433, 0.5458) Bounds: xmin=0.2884, ymin=0.2592, xmax=0.5982, ymax=0.7773
+
+Frame count: 76 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.4342, 0.5538) Bounds: xmin=0.2841, ymin=0.2581, xmax=0.5843, ymax=0.7872
+
+Frame count: 77 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.76 Detection count: 1 Position: center=(0.4307, 0.5682) Bounds: xmin=0.2810, ymin=0.2706, xmax=0.5804, ymax=0.7904
+
+Frame count: 78 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.84 Detection count: 1 Position: center=(0.4319, 0.5799) Bounds: xmin=0.2821, ymin=0.2736, xmax=0.5817, ymax=0.8002
+
+Frame count: 79 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.86 Detection count: 1 Position: center=(0.4311, 0.5885) Bounds: xmin=0.2845, ymin=0.2700, xmax=0.5778, ymax=0.8131
+
+Frame count: 80 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.92 Detection count: 1 Position: center=(0.4328, 0.6009) Bounds: xmin=0.2882, ymin=0.2701, xmax=0.5774, ymax=0.8266
+
+Frame count: 81 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.91 Detection count: 1 Position: center=(0.4349, 0.6192) Bounds: xmin=0.2955, ymin=0.2745, xmax=0.5744, ymax=0.8422
+
+Frame count: 82 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.90 Detection count: 1 Position: center=(0.4356, 0.6308) Bounds: xmin=0.2977, ymin=0.2771, xmax=0.5736, ymax=0.8524
+
+Frame count: 83 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.90 Detection count: 1 Position: center=(0.4350, 0.6356) Bounds: xmin=0.2963, ymin=0.2729, xmax=0.5737, ymax=0.8617
+
+Frame count: 84 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.88 Detection count: 1 Position: center=(0.4340, 0.6440) Bounds: xmin=0.2934, ymin=0.2748, xmax=0.5746, ymax=0.8691
+
+Frame count: 85 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.91 Detection count: 1 Position: center=(0.4311, 0.6750) Bounds: xmin=0.2888, ymin=0.3015, xmax=0.5733, ymax=0.8763
+
+Frame count: 86 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.89 Detection count: 1 Position: center=(0.4307, 0.7030) Bounds: xmin=0.2872, ymin=0.3109, xmax=0.5741, ymax=0.8974
+
+Frame count: 87 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4251, 0.7198) Bounds: xmin=0.2759, ymin=0.3093, xmax=0.5743, ymax=0.9174
+
+Frame count: 88 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4251, 0.7198) Bounds: xmin=0.2759, ymin=0.3093, xmax=0.5743, ymax=0.9174
+
+Frame count: 89 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4251, 0.7198) Bounds: xmin=0.2759, ymin=0.3093, xmax=0.5743, ymax=0.9174
+
+Frame count: 90 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4251, 0.7198) Bounds: xmin=0.2759, ymin=0.3093, xmax=0.5743, ymax=0.9174
+
+Frame count: 91 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4190, 0.7667) Bounds: xmin=0.3003, ymin=0.3386, xmax=0.5377, ymax=0.9394
+
+Frame count: 92 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.73 Detection count: 1 Position: center=(0.4278, 0.7654) Bounds: xmin=0.3274, ymin=0.3400, xmax=0.5283, ymax=0.9365
+
+Frame count: 93 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.4290, 0.7591) Bounds: xmin=0.3271, ymin=0.3351, xmax=0.5310, ymax=0.9345
+
+Frame count: 94 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.4290, 0.7591) Bounds: xmin=0.3271, ymin=0.3351, xmax=0.5310, ymax=0.9345
+
+Frame count: 95 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.4290, 0.7591) Bounds: xmin=0.3271, ymin=0.3351, xmax=0.5310, ymax=0.9345
+
+Frame count: 96 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.4290, 0.7591) Bounds: xmin=0.3271, ymin=0.3351, xmax=0.5310, ymax=0.9345
+
+Frame count: 97 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.4290, 0.7591) Bounds: xmin=0.3271, ymin=0.3351, xmax=0.5310, ymax=0.9345
+
+Frame count: 98 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.4082, 0.6281) Bounds: xmin=0.2801, ymin=0.3118, xmax=0.5363, ymax=0.8146
+
+Frame count: 99 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.4082, 0.6281) Bounds: xmin=0.2801, ymin=0.3118, xmax=0.5363, ymax=0.8146
+
+Frame count: 100 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.4082, 0.6281) Bounds: xmin=0.2801, ymin=0.3118, xmax=0.5363, ymax=0.8146
+
+Frame count: 101 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.4082, 0.6281) Bounds: xmin=0.2801, ymin=0.3118, xmax=0.5363, ymax=0.8146
+
+Frame count: 102 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.44 Detection count: 1 Position: center=(0.4086, 0.5085) Bounds: xmin=0.2731, ymin=0.2102, xmax=0.5440, ymax=0.7856
+
+Frame count: 103 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.44 Detection count: 1 Position: center=(0.4086, 0.5085) Bounds: xmin=0.2731, ymin=0.2102, xmax=0.5440, ymax=0.7856
+
+Frame count: 104 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4041, 0.5094) Bounds: xmin=0.2616, ymin=0.2322, xmax=0.5466, ymax=0.7645
+
+Frame count: 105 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4041, 0.5094) Bounds: xmin=0.2616, ymin=0.2322, xmax=0.5466, ymax=0.7645
+
+Frame count: 106 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4041, 0.5094) Bounds: xmin=0.2616, ymin=0.2322, xmax=0.5466, ymax=0.7645
+
+Frame count: 107 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4041, 0.5094) Bounds: xmin=0.2616, ymin=0.2322, xmax=0.5466, ymax=0.7645
+
+Frame count: 108 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4041, 0.5094) Bounds: xmin=0.2616, ymin=0.2322, xmax=0.5466, ymax=0.7645
+
+Frame count: 109 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4041, 0.5094) Bounds: xmin=0.2616, ymin=0.2322, xmax=0.5466, ymax=0.7645
+
+Frame count: 110 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 111 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 112 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 113 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 114 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 115 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 116 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 117 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 118 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 119 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 120 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 121 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 122 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.4382, 0.2515) Bounds: xmin=0.3229, ymin=0.2054, xmax=0.5535, ymax=0.5094
+
+Frame count: 123 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.55 Detection count: 1 Position: center=(0.4511, 0.3771) Bounds: xmin=0.3210, ymin=0.2134, xmax=0.5813, ymax=0.6387
+
+Frame count: 124 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.58 Detection count: 1 Position: center=(0.4493, 0.3881) Bounds: xmin=0.3158, ymin=0.2121, xmax=0.5828, ymax=0.6520
+
+Frame count: 125 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.58 Detection count: 1 Position: center=(0.4493, 0.3881) Bounds: xmin=0.3158, ymin=0.2121, xmax=0.5828, ymax=0.6520
+
+Frame count: 126 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4436, 0.3904) Bounds: xmin=0.3020, ymin=0.2147, xmax=0.5853, ymax=0.6519
+
+Frame count: 127 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.41 Detection count: 1 Position: center=(0.4433, 0.3858) Bounds: xmin=0.3000, ymin=0.2162, xmax=0.5867, ymax=0.6455
+
+Frame count: 128 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.4436, 0.3813) Bounds: xmin=0.2997, ymin=0.2164, xmax=0.5875, ymax=0.6403
+
+Frame count: 129 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.60 Detection count: 1 Position: center=(0.4467, 0.3774) Bounds: xmin=0.3038, ymin=0.2273, xmax=0.5897, ymax=0.6251
+
+Frame count: 130 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.62 Detection count: 1 Position: center=(0.4483, 0.3786) Bounds: xmin=0.3041, ymin=0.2306, xmax=0.5924, ymax=0.6231
+
+Frame count: 131 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.4466, 0.3706) Bounds: xmin=0.3026, ymin=0.2280, xmax=0.5906, ymax=0.6170
+
+Frame count: 132 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.56 Detection count: 1 Position: center=(0.4450, 0.3660) Bounds: xmin=0.2999, ymin=0.2287, xmax=0.5902, ymax=0.6113
+
+Frame count: 133 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4442, 0.3622) Bounds: xmin=0.2965, ymin=0.2261, xmax=0.5920, ymax=0.6097
+
+Frame count: 134 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.63 Detection count: 1 Position: center=(0.4427, 0.3542) Bounds: xmin=0.2957, ymin=0.2163, xmax=0.5896, ymax=0.6108
+
+Frame count: 135 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.53 Detection count: 1 Position: center=(0.4445, 0.3476) Bounds: xmin=0.3010, ymin=0.2126, xmax=0.5880, ymax=0.6073
+
+Frame count: 136 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.74 Detection count: 1 Position: center=(0.4522, 0.3531) Bounds: xmin=0.3165, ymin=0.2181, xmax=0.5878, ymax=0.6078
+
+Frame count: 137 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.81 Detection count: 1 Position: center=(0.4577, 0.3526) Bounds: xmin=0.3292, ymin=0.2246, xmax=0.5862, ymax=0.6008
+
+Frame count: 138 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.65 Detection count: 1 Position: center=(0.4706, 0.3462) Bounds: xmin=0.3518, ymin=0.2226, xmax=0.5894, ymax=0.5957
+
+Frame count: 139 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4758, 0.3564) Bounds: xmin=0.3549, ymin=0.2217, xmax=0.5966, ymax=0.6078
+
+Frame count: 140 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.90 Detection count: 1 Position: center=(0.4707, 0.3580) Bounds: xmin=0.3410, ymin=0.2226, xmax=0.6003, ymax=0.6087
+
+Frame count: 141 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.4565, 0.3600) Bounds: xmin=0.3101, ymin=0.2230, xmax=0.6029, ymax=0.6104
+
+Frame count: 142 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.4565, 0.3600) Bounds: xmin=0.3101, ymin=0.2230, xmax=0.6029, ymax=0.6104
+
+Frame count: 143 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.4565, 0.3600) Bounds: xmin=0.3101, ymin=0.2230, xmax=0.6029, ymax=0.6104
+
+Frame count: 144 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.41 Detection count: 1 Position: center=(0.4494, 0.2795) Bounds: xmin=0.2889, ymin=0.1862, xmax=0.6098, ymax=0.5593
+
+Frame count: 145 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4960, 0.1931) Bounds: xmin=0.4011, ymin=0.1508, xmax=0.5910, ymax=0.5003
+
+Frame count: 146 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4960, 0.1931) Bounds: xmin=0.4011, ymin=0.1508, xmax=0.5910, ymax=0.5003
+
+Frame count: 147 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.54 Detection count: 1 Position: center=(0.4960, 0.1931) Bounds: xmin=0.4011, ymin=0.1508, xmax=0.5910, ymax=0.5003
+
+Frame count: 148 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.4696, 0.0008) Bounds: xmin=0.3256, ymin=0.0176, xmax=0.6135, ymax=0.4232
+
+Frame count: 149 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.51 Detection count: 1 Position: center=(0.4794, -0.0095) Bounds: xmin=0.3230, ymin=0.0141, xmax=0.6357, ymax=0.4154
+
+Frame count: 150 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.51 Detection count: 1 Position: center=(0.4794, -0.0095) Bounds: xmin=0.3230, ymin=0.0141, xmax=0.6357, ymax=0.4154
+
+Frame count: 151 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.51 Detection count: 1 Position: center=(0.4794, -0.0095) Bounds: xmin=0.3230, ymin=0.0141, xmax=0.6357, ymax=0.4154
+
+Frame count: 152 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.51 Detection count: 1 Position: center=(0.4794, -0.0095) Bounds: xmin=0.3230, ymin=0.0141, xmax=0.6357, ymax=0.4154
+
+Frame count: 153 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 154 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 155 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 156 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 157 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 158 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 159 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 160 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 161 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 162 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 163 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.57 Detection count: 1 Position: center=(0.5115, -0.0633) Bounds: xmin=0.3800, ymin=-0.0029, xmax=0.6430, ymax=0.3737
+
+Frame count: 164 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.44 Detection count: 1 Position: center=(0.4844, -0.1169) Bounds: xmin=0.4137, ymin=-0.0001, xmax=0.5552, ymax=0.3124
+
+Frame count: 165 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.44 Detection count: 1 Position: center=(0.4844, -0.1169) Bounds: xmin=0.4137, ymin=-0.0001, xmax=0.5552, ymax=0.3124
+
+Frame count: 166 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.44 Detection count: 1 Position: center=(0.4844, -0.1169) Bounds: xmin=0.4137, ymin=-0.0001, xmax=0.5552, ymax=0.3124
+
+Frame count: 167 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.79 Detection count: 1 Position: center=(0.4383, -0.1101) Bounds: xmin=0.3755, ymin=-0.0069, xmax=0.5011, ymax=0.3265
+
+Frame count: 168 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4291, -0.0509) Bounds: xmin=0.3584, ymin=-0.0095, xmax=0.4998, ymax=0.3938
+
+Frame count: 169 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4291, -0.0509) Bounds: xmin=0.3584, ymin=-0.0095, xmax=0.4998, ymax=0.3938
+
+Frame count: 170 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.76 Detection count: 1 Position: center=(0.4180, 0.0383) Bounds: xmin=0.3536, ymin=0.0161, xmax=0.4824, ymax=0.4658
+
+Frame count: 171 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.4135, 0.1126) Bounds: xmin=0.3479, ymin=0.0813, xmax=0.4790, ymax=0.4817
+
+Frame count: 172 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.4232, 0.1571) Bounds: xmin=0.3406, ymin=0.1000, xmax=0.5058, ymax=0.5117
+
+Frame count: 173 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.4232, 0.1571) Bounds: xmin=0.3406, ymin=0.1000, xmax=0.5058, ymax=0.5117
+
+Frame count: 174 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.79 Detection count: 1 Position: center=(0.3939, 0.2807) Bounds: xmin=0.3267, ymin=0.1895, xmax=0.4610, ymax=0.5573
+
+Frame count: 175 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.3893, 0.3357) Bounds: xmin=0.3071, ymin=0.2213, xmax=0.4716, ymax=0.5856
+
+Frame count: 176 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.85 Detection count: 1 Position: center=(0.3837, 0.3750) Bounds: xmin=0.2893, ymin=0.2461, xmax=0.4781, ymax=0.6037
+
+Frame count: 177 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.85 Detection count: 1 Position: center=(0.3837, 0.3750) Bounds: xmin=0.2893, ymin=0.2461, xmax=0.4781, ymax=0.6037
+
+Frame count: 178 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.69 Detection count: 1 Position: center=(0.3689, 0.3817) Bounds: xmin=0.2941, ymin=0.2617, xmax=0.4437, ymax=0.5955
+
+Frame count: 179 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.3664, 0.3831) Bounds: xmin=0.2901, ymin=0.2689, xmax=0.4428, ymax=0.5897
+
+Frame count: 180 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.66 Detection count: 1 Position: center=(0.3641, 0.4105) Bounds: xmin=0.2863, ymin=0.2685, xmax=0.4418, ymax=0.6201
+
+Frame count: 181 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.55 Detection count: 1 Position: center=(0.3433, 0.4175) Bounds: xmin=0.2712, ymin=0.2748, xmax=0.4155, ymax=0.6215
+
+Frame count: 182 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.90 Detection count: 1 Position: center=(0.3335, 0.4039) Bounds: xmin=0.2649, ymin=0.2812, xmax=0.4021, ymax=0.6002
+
+Frame count: 183 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.90 Detection count: 1 Position: center=(0.3233, 0.3918) Bounds: xmin=0.2575, ymin=0.2868, xmax=0.3892, ymax=0.5814
+
+Frame count: 184 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.92 Detection count: 1 Position: center=(0.3100, 0.3819) Bounds: xmin=0.2529, ymin=0.2940, xmax=0.3671, ymax=0.5634
+
+Frame count: 185 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.88 Detection count: 1 Position: center=(0.3010, 0.3629) Bounds: xmin=0.2508, ymin=0.2923, xmax=0.3513, ymax=0.5443
+
+Frame count: 186 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.2989, 0.3628) Bounds: xmin=0.2479, ymin=0.2924, xmax=0.3498, ymax=0.5441
+
+Frame count: 187 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.2989, 0.3628) Bounds: xmin=0.2479, ymin=0.2924, xmax=0.3498, ymax=0.5441
+
+Frame count: 188 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.73 Detection count: 1 Position: center=(0.3044, 0.4003) Bounds: xmin=0.2458, ymin=0.2855, xmax=0.3630, ymax=0.5920
+
+Frame count: 189 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.73 Detection count: 1 Position: center=(0.3044, 0.4003) Bounds: xmin=0.2458, ymin=0.2855, xmax=0.3630, ymax=0.5920
+
+Frame count: 190 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.53 Detection count: 1 Position: center=(0.2969, 0.3631) Bounds: xmin=0.2284, ymin=0.2790, xmax=0.3655, ymax=0.5579
+
+Frame count: 191 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.63 Detection count: 1 Position: center=(0.2804, 0.3655) Bounds: xmin=0.2150, ymin=0.2936, xmax=0.3458, ymax=0.5458
+
+Frame count: 192 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.61 Detection count: 1 Position: center=(0.2574, 0.3652) Bounds: xmin=0.1855, ymin=0.2957, xmax=0.3293, ymax=0.5434
+
+Frame count: 193 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.72 Detection count: 1 Position: center=(0.2450, 0.3714) Bounds: xmin=0.1745, ymin=0.3003, xmax=0.3155, ymax=0.5456
+
+Frame count: 194 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.72 Detection count: 1 Position: center=(0.2450, 0.3714) Bounds: xmin=0.1745, ymin=0.3003, xmax=0.3155, ymax=0.5456
+
+Frame count: 195 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.72 Detection count: 1 Position: center=(0.2450, 0.3714) Bounds: xmin=0.1745, ymin=0.3003, xmax=0.3155, ymax=0.5456
+
+Frame count: 196 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.81 Detection count: 1 Position: center=(0.2434, 0.3839) Bounds: xmin=0.1911, ymin=0.3183, xmax=0.2958, ymax=0.5412
+
+Frame count: 197 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.2478, 0.3881) Bounds: xmin=0.1971, ymin=0.3277, xmax=0.2985, ymax=0.5365
+
+Frame count: 198 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.2546, 0.4095) Bounds: xmin=0.1988, ymin=0.3356, xmax=0.3103, ymax=0.5519
+
+Frame count: 199 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.59 Detection count: 1 Position: center=(0.2566, 0.4086) Bounds: xmin=0.1963, ymin=0.3418, xmax=0.3170, ymax=0.5448
+
+Frame count: 200 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.2447, 0.4149) Bounds: xmin=0.1957, ymin=0.3457, xmax=0.2936, ymax=0.5477
+
+Frame count: 201 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.80 Detection count: 1 Position: center=(0.2414, 0.4289) Bounds: xmin=0.1881, ymin=0.3510, xmax=0.2947, ymax=0.5577
+
+Frame count: 202 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.84 Detection count: 1 Position: center=(0.2392, 0.4290) Bounds: xmin=0.1834, ymin=0.3499, xmax=0.2950, ymax=0.5589
+
+Frame count: 203 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.84 Detection count: 1 Position: center=(0.2320, 0.4290) Bounds: xmin=0.1797, ymin=0.3487, xmax=0.2843, ymax=0.5601
+
+Frame count: 204 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.74 Detection count: 1 Position: center=(0.2257, 0.4241) Bounds: xmin=0.1791, ymin=0.3491, xmax=0.2723, ymax=0.5544
+
+Frame count: 205 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.74 Detection count: 1 Position: center=(0.2257, 0.4241) Bounds: xmin=0.1791, ymin=0.3491, xmax=0.2723, ymax=0.5544
+
+Frame count: 206 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.2255, 0.4108) Bounds: xmin=0.1816, ymin=0.3445, xmax=0.2694, ymax=0.5444
+
+Frame count: 207 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.77 Detection count: 1 Position: center=(0.2294, 0.3995) Bounds: xmin=0.1824, ymin=0.3300, xmax=0.2764, ymax=0.5466
+
+Frame count: 208 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.44 Detection count: 1 Position: center=(0.2278, 0.3941) Bounds: xmin=0.1850, ymin=0.3313, xmax=0.2705, ymax=0.5394
+
+Frame count: 209 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.2296, 0.4025) Bounds: xmin=0.1857, ymin=0.3303, xmax=0.2736, ymax=0.5496
+
+Frame count: 210 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.2296, 0.4025) Bounds: xmin=0.1857, ymin=0.3303, xmax=0.2736, ymax=0.5496
+
+Frame count: 211 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.2296, 0.4025) Bounds: xmin=0.1857, ymin=0.3303, xmax=0.2736, ymax=0.5496
+
+Frame count: 212 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.75 Detection count: 1 Position: center=(0.2296, 0.4025) Bounds: xmin=0.1857, ymin=0.3303, xmax=0.2736, ymax=0.5496
+
+Frame count: 213 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.56 Detection count: 1 Position: center=(0.2197, 0.3482) Bounds: xmin=0.1703, ymin=0.2916, xmax=0.2690, ymax=0.5290
+
+Frame count: 214 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.56 Detection count: 1 Position: center=(0.2197, 0.3482) Bounds: xmin=0.1703, ymin=0.2916, xmax=0.2690, ymax=0.5290
+
+Frame count: 215 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.56 Detection count: 1 Position: center=(0.2197, 0.3482) Bounds: xmin=0.1703, ymin=0.2916, xmax=0.2690, ymax=0.5290
+
+Frame count: 216 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.56 Detection count: 1 Position: center=(0.2197, 0.3482) Bounds: xmin=0.1703, ymin=0.2916, xmax=0.2690, ymax=0.5290
+
+Frame count: 217 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.56 Detection count: 1 Position: center=(0.2197, 0.3482) Bounds: xmin=0.1703, ymin=0.2916, xmax=0.2690, ymax=0.5290
+
+Frame count: 218 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.60 Detection count: 1 Position: center=(0.2232, 0.3408) Bounds: xmin=0.1762, ymin=0.3022, xmax=0.2701, ymax=0.5103
+
+Frame count: 219 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.43 Detection count: 1 Position: center=(0.2186, 0.3260) Bounds: xmin=0.1691, ymin=0.3010, xmax=0.2681, ymax=0.4953
+
+Frame count: 220 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 221 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 222 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 223 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 224 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 225 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 226 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 227 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.47 Detection count: 1 Position: center=(0.2229, 0.3211) Bounds: xmin=0.1708, ymin=0.3045, xmax=0.2750, ymax=0.4864
+
+Frame count: 228 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.2280, 0.2422) Bounds: xmin=0.1740, ymin=0.2235, xmax=0.2821, ymax=0.4813
+
+Frame count: 229 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.67 Detection count: 1 Position: center=(0.2283, 0.2414) Bounds: xmin=0.1751, ymin=0.2313, xmax=0.2816, ymax=0.4725
+
+Frame count: 230 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.67 Detection count: 1 Position: center=(0.2283, 0.2414) Bounds: xmin=0.1751, ymin=0.2313, xmax=0.2816, ymax=0.4725
+
+Frame count: 231 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.67 Detection count: 1 Position: center=(0.2283, 0.2414) Bounds: xmin=0.1751, ymin=0.2313, xmax=0.2816, ymax=0.4725
+
+Frame count: 232 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.67 Detection count: 1 Position: center=(0.2283, 0.2414) Bounds: xmin=0.1751, ymin=0.2313, xmax=0.2816, ymax=0.4725
+
+Frame count: 233 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.67 Detection count: 1 Position: center=(0.2283, 0.2414) Bounds: xmin=0.1751, ymin=0.2313, xmax=0.2816, ymax=0.4725
+
+Frame count: 234 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.2464, 0.2057) Bounds: xmin=0.1877, ymin=0.2346, xmax=0.3052, ymax=0.4302
+
+Frame count: 235 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.52 Detection count: 1 Position: center=(0.2464, 0.2057) Bounds: xmin=0.1877, ymin=0.2346, xmax=0.3052, ymax=0.4302
+
+Frame count: 236 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 237 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 238 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 239 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 240 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 241 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 242 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 243 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 244 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 245 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 246 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 247 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 248 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 249 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 250 Width: 1280 Heigth: 720
+Label: Madsen ID: 1 Confidence: 0.42 Detection count: 1 Position: center=(0.2553, 0.1497) Bounds: xmin=0.1927, ymin=0.1621, xmax=0.3179, ymax=0.4415
+
+Frame count: 251 Width: 1280 Heigth: 720
+
+Frame count: 252 Width: 1280 Heigth: 720
+
+Frame count: 253 Width: 1280 Heigth: 720
+
+Frame count: 254 Width: 1280 Heigth: 720
+
+Frame count: 255 Width: 1280 Heigth: 720
+
+Frame count: 256 Width: 1280 Heigth: 720
+
+Frame count: 257 Width: 1280 Heigth: 720
+
+Frame count: 258 Width: 1280 Heigth: 720
+
+Frame count: 259 Width: 1280 Heigth: 720
+
+Frame count: 260 Width: 1280 Heigth: 720
+
+Frame count: 261 Width: 1280 Heigth: 720
+
+Frame count: 262 Width: 1280 Heigth: 720
+
+Frame count: 263 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.48 Detection count: 1 Position: center=(0.3441, 0.6069) Bounds: xmin=0.2675, ymin=0.4183, xmax=0.4207, ymax=0.6850
+
+Frame count: 264 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 265 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 266 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 267 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 268 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 269 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 270 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 271 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 272 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 273 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 274 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+
+Frame count: 275 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 2 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 276 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 2 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 277 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 2 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 278 Width: 1280 Heigth: 720
+Label: Madsen ID: 2 Confidence: 0.61 Detection count: 1 Position: center=(0.3504, 0.5583) Bounds: xmin=0.2763, ymin=0.3819, xmax=0.4244, ymax=0.6682
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 2 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 279 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 280 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 281 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 282 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 283 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 284 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 285 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 286 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 287 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 288 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 289 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.48 Detection count: 1 Position: center=(0.3678, -0.0805) Bounds: xmin=0.2874, ymin=0.0299, xmax=0.4481, ymax=0.3222
+
+Frame count: 290 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.50 Detection count: 1 Position: center=(0.3137, 0.0214) Bounds: xmin=0.2386, ymin=0.1183, xmax=0.3889, ymax=0.3451
+
+Frame count: 291 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.50 Detection count: 1 Position: center=(0.3137, 0.0214) Bounds: xmin=0.2386, ymin=0.1183, xmax=0.3889, ymax=0.3451
+
+Frame count: 292 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.50 Detection count: 1 Position: center=(0.3137, 0.0214) Bounds: xmin=0.2386, ymin=0.1183, xmax=0.3889, ymax=0.3451
+
+Frame count: 293 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.50 Detection count: 1 Position: center=(0.3137, 0.0214) Bounds: xmin=0.2386, ymin=0.1183, xmax=0.3889, ymax=0.3451
+
+Frame count: 294 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.50 Detection count: 1 Position: center=(0.3137, 0.0214) Bounds: xmin=0.2386, ymin=0.1183, xmax=0.3889, ymax=0.3451
+
+Frame count: 295 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.64 Detection count: 1 Position: center=(0.3333, 0.1247) Bounds: xmin=0.2699, ymin=0.1593, xmax=0.3967, ymax=0.4170
+
+Frame count: 296 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.64 Detection count: 1 Position: center=(0.3333, 0.1247) Bounds: xmin=0.2699, ymin=0.1593, xmax=0.3967, ymax=0.4170
+
+Frame count: 297 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.59 Detection count: 1 Position: center=(0.3398, 0.1826) Bounds: xmin=0.2783, ymin=0.1937, xmax=0.4013, ymax=0.4459
+
+Frame count: 298 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.58 Detection count: 1 Position: center=(0.3389, 0.2329) Bounds: xmin=0.2729, ymin=0.2044, xmax=0.4049, ymax=0.4901
+
+Frame count: 299 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.43 Detection count: 1 Position: center=(0.3396, 0.2686) Bounds: xmin=0.2698, ymin=0.2210, xmax=0.4093, ymax=0.5125
+
+Frame count: 300 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.43 Detection count: 1 Position: center=(0.3396, 0.2686) Bounds: xmin=0.2698, ymin=0.2210, xmax=0.4093, ymax=0.5125
+
+Frame count: 301 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.43 Detection count: 1 Position: center=(0.3396, 0.2686) Bounds: xmin=0.2698, ymin=0.2210, xmax=0.4093, ymax=0.5125
+
+Frame count: 302 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.74 Detection count: 1 Position: center=(0.3437, 0.3586) Bounds: xmin=0.2800, ymin=0.2816, xmax=0.4075, ymax=0.5503
+
+Frame count: 303 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.64 Detection count: 1 Position: center=(0.3530, 0.3729) Bounds: xmin=0.2992, ymin=0.2949, xmax=0.4068, ymax=0.5526
+
+Frame count: 304 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3576, 0.3796) Bounds: xmin=0.3065, ymin=0.2958, xmax=0.4087, ymax=0.5590
+
+Frame count: 305 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.56 Detection count: 1 Position: center=(0.3599, 0.3900) Bounds: xmin=0.3062, ymin=0.3037, xmax=0.4135, ymax=0.5626
+
+Frame count: 306 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.85 Detection count: 1 Position: center=(0.3595, 0.4262) Bounds: xmin=0.2996, ymin=0.3334, xmax=0.4194, ymax=0.5724
+
+Frame count: 307 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.89 Detection count: 1 Position: center=(0.3599, 0.4400) Bounds: xmin=0.2958, ymin=0.3461, xmax=0.4240, ymax=0.5748
+
+Frame count: 308 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.88 Detection count: 1 Position: center=(0.3598, 0.4454) Bounds: xmin=0.2942, ymin=0.3544, xmax=0.4254, ymax=0.5723
+
+Frame count: 309 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.85 Detection count: 1 Position: center=(0.3601, 0.4553) Bounds: xmin=0.2949, ymin=0.3657, xmax=0.4253, ymax=0.5719
+
+Frame count: 310 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.61 Detection count: 1 Position: center=(0.3611, 0.4569) Bounds: xmin=0.2915, ymin=0.3765, xmax=0.4306, ymax=0.5628
+
+Frame count: 311 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.79 Detection count: 1 Position: center=(0.3591, 0.4559) Bounds: xmin=0.2877, ymin=0.3828, xmax=0.4306, ymax=0.5554
+
+Frame count: 312 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.79 Detection count: 1 Position: center=(0.3591, 0.4559) Bounds: xmin=0.2877, ymin=0.3828, xmax=0.4306, ymax=0.5554
+
+Frame count: 313 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.79 Detection count: 1 Position: center=(0.3591, 0.4559) Bounds: xmin=0.2877, ymin=0.3828, xmax=0.4306, ymax=0.5554
+
+Frame count: 314 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.79 Detection count: 1 Position: center=(0.3591, 0.4559) Bounds: xmin=0.2877, ymin=0.3828, xmax=0.4306, ymax=0.5554
+
+Frame count: 315 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3624, 0.5005) Bounds: xmin=0.2840, ymin=0.4091, xmax=0.4409, ymax=0.5779
+
+Frame count: 316 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.67 Detection count: 1 Position: center=(0.3645, 0.5011) Bounds: xmin=0.2884, ymin=0.4181, xmax=0.4407, ymax=0.5696
+
+Frame count: 317 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.68 Detection count: 1 Position: center=(0.3671, 0.4850) Bounds: xmin=0.2921, ymin=0.4108, xmax=0.4420, ymax=0.5592
+
+Frame count: 318 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.68 Detection count: 1 Position: center=(0.3671, 0.4850) Bounds: xmin=0.2921, ymin=0.4108, xmax=0.4420, ymax=0.5592
+
+Frame count: 319 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.68 Detection count: 1 Position: center=(0.3671, 0.4850) Bounds: xmin=0.2921, ymin=0.4108, xmax=0.4420, ymax=0.5592
+
+Frame count: 320 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.50 Detection count: 1 Position: center=(0.3682, 0.4350) Bounds: xmin=0.2859, ymin=0.3108, xmax=0.4506, ymax=0.6046
+
+Frame count: 321 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.59 Detection count: 1 Position: center=(0.3694, 0.4440) Bounds: xmin=0.2896, ymin=0.3102, xmax=0.4491, ymax=0.6151
+
+Frame count: 322 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.75 Detection count: 1 Position: center=(0.3722, 0.4515) Bounds: xmin=0.2959, ymin=0.3211, xmax=0.4485, ymax=0.6124
+
+Frame count: 323 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.77 Detection count: 1 Position: center=(0.3769, 0.4317) Bounds: xmin=0.3035, ymin=0.3318, xmax=0.4503, ymax=0.5799
+
+Frame count: 324 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3789, 0.3857) Bounds: xmin=0.3042, ymin=0.2653, xmax=0.4535, ymax=0.5962
+
+Frame count: 325 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3789, 0.3857) Bounds: xmin=0.3042, ymin=0.2653, xmax=0.4535, ymax=0.5962
+
+Frame count: 326 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3789, 0.3857) Bounds: xmin=0.3042, ymin=0.2653, xmax=0.4535, ymax=0.5962
+
+Frame count: 327 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3789, 0.3857) Bounds: xmin=0.3042, ymin=0.2653, xmax=0.4535, ymax=0.5962
+
+Frame count: 328 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3789, 0.3857) Bounds: xmin=0.3042, ymin=0.2653, xmax=0.4535, ymax=0.5962
+
+Frame count: 329 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3789, 0.3857) Bounds: xmin=0.3042, ymin=0.2653, xmax=0.4535, ymax=0.5962
+
+Frame count: 330 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.45 Detection count: 1 Position: center=(0.3789, 0.3857) Bounds: xmin=0.3042, ymin=0.2653, xmax=0.4535, ymax=0.5962
+
+Frame count: 331 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.47 Detection count: 1 Position: center=(0.3812, 0.2818) Bounds: xmin=0.3104, ymin=0.1949, xmax=0.4520, ymax=0.5531
+
+Frame count: 332 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.47 Detection count: 1 Position: center=(0.3812, 0.2818) Bounds: xmin=0.3104, ymin=0.1949, xmax=0.4520, ymax=0.5531
+
+Frame count: 333 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.47 Detection count: 1 Position: center=(0.3812, 0.2818) Bounds: xmin=0.3104, ymin=0.1949, xmax=0.4520, ymax=0.5531
+
+Frame count: 334 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.47 Detection count: 1 Position: center=(0.3812, 0.2818) Bounds: xmin=0.3104, ymin=0.1949, xmax=0.4520, ymax=0.5531
+
+Frame count: 335 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.59 Detection count: 1 Position: center=(0.3928, 0.2615) Bounds: xmin=0.3152, ymin=0.1605, xmax=0.4704, ymax=0.5653
+
+Frame count: 336 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.51 Detection count: 1 Position: center=(0.3902, 0.3112) Bounds: xmin=0.3107, ymin=0.2068, xmax=0.4697, ymax=0.5733
+
+Frame count: 337 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.51 Detection count: 1 Position: center=(0.3902, 0.3112) Bounds: xmin=0.3107, ymin=0.2068, xmax=0.4697, ymax=0.5733
+
+Frame count: 338 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.51 Detection count: 1 Position: center=(0.3902, 0.3112) Bounds: xmin=0.3107, ymin=0.2068, xmax=0.4697, ymax=0.5733
+
+Frame count: 339 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.55 Detection count: 1 Position: center=(0.3947, 0.3869) Bounds: xmin=0.3238, ymin=0.2915, xmax=0.4656, ymax=0.5713
+
+Frame count: 340 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.55 Detection count: 1 Position: center=(0.3947, 0.3869) Bounds: xmin=0.3238, ymin=0.2915, xmax=0.4656, ymax=0.5713
+
+Frame count: 341 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.67 Detection count: 1 Position: center=(0.4024, 0.3884) Bounds: xmin=0.3374, ymin=0.2802, xmax=0.4673, ymax=0.5842
+
+Frame count: 342 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.72 Detection count: 1 Position: center=(0.4041, 0.4069) Bounds: xmin=0.3406, ymin=0.3000, xmax=0.4677, ymax=0.5847
+
+Frame count: 343 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.53 Detection count: 1 Position: center=(0.4022, 0.3779) Bounds: xmin=0.3351, ymin=0.2611, xmax=0.4693, ymax=0.5919
+
+Frame count: 344 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.40 Detection count: 1 Position: center=(0.3957, 0.3791) Bounds: xmin=0.3298, ymin=0.2568, xmax=0.4616, ymax=0.5976
+
+Frame count: 345 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 346 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 347 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 348 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 349 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 350 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 351 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 352 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 353 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 354 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 355 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 356 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 357 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 358 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 359 Width: 1280 Heigth: 720
+Label: Madsen ID: 3 Confidence: 0.54 Detection count: 1 Position: center=(0.3901, 0.3973) Bounds: xmin=0.3232, ymin=0.2721, xmax=0.4569, ymax=0.6022
+
+Frame count: 360 Width: 1280 Heigth: 720
+
+Frame count: 361 Width: 1280 Heigth: 720
+
+Frame count: 362 Width: 1280 Heigth: 720
+
+Frame count: 363 Width: 1280 Heigth: 720
+
+Frame count: 364 Width: 1280 Heigth: 720
+
+Frame count: 365 Width: 1280 Heigth: 720
+
+Frame count: 366 Width: 1280 Heigth: 720
+
+Frame count: 367 Width: 1280 Heigth: 720
+
+Frame count: 368 Width: 1280 Heigth: 720
+
+Frame count: 369 Width: 1280 Heigth: 720
+
+Frame count: 370 Width: 1280 Heigth: 720
+
+Frame count: 371 Width: 1280 Heigth: 720
+
+Frame count: 372 Width: 1280 Heigth: 720
+
+Frame count: 373 Width: 1280 Heigth: 720
+
+Frame count: 374 Width: 1280 Heigth: 720
+
+Frame count: 375 Width: 1280 Heigth: 720
+
+Frame count: 376 Width: 1280 Heigth: 720
+
+Frame count: 377 Width: 1280 Heigth: 720
+
+Frame count: 378 Width: 1280 Heigth: 720
+
+Frame count: 379 Width: 1280 Heigth: 720
+
+Frame count: 380 Width: 1280 Heigth: 720
+
+Frame count: 381 Width: 1280 Heigth: 720
+
+Frame count: 382 Width: 1280 Heigth: 720
+
+Frame count: 383 Width: 1280 Heigth: 720
+
+Frame count: 384 Width: 1280 Heigth: 720
+
+Frame count: 385 Width: 1280 Heigth: 720
+
+Frame count: 386 Width: 1280 Heigth: 720
+
+Frame count: 387 Width: 1280 Heigth: 720
+
+Frame count: 388 Width: 1280 Heigth: 720
+
+Frame count: 389 Width: 1280 Heigth: 720
+
+Frame count: 390 Width: 1280 Heigth: 720
+
+Frame count: 391 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.61 Detection count: 1 Position: center=(0.3540, 0.4701) Bounds: xmin=0.2919, ymin=0.3597, xmax=0.4161, ymax=0.5941
+
+Frame count: 392 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.65 Detection count: 1 Position: center=(0.3456, 0.4720) Bounds: xmin=0.2814, ymin=0.3571, xmax=0.4098, ymax=0.5988
+
+Frame count: 393 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.65 Detection count: 1 Position: center=(0.3456, 0.4720) Bounds: xmin=0.2814, ymin=0.3571, xmax=0.4098, ymax=0.5988
+
+Frame count: 394 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.65 Detection count: 1 Position: center=(0.3456, 0.4720) Bounds: xmin=0.2814, ymin=0.3571, xmax=0.4098, ymax=0.5988
+
+Frame count: 395 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.62 Detection count: 1 Position: center=(0.3540, 0.5171) Bounds: xmin=0.2820, ymin=0.3767, xmax=0.4260, ymax=0.6284
+
+Frame count: 396 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.62 Detection count: 1 Position: center=(0.3540, 0.5171) Bounds: xmin=0.2820, ymin=0.3767, xmax=0.4260, ymax=0.6284
+
+Frame count: 397 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.62 Detection count: 1 Position: center=(0.3540, 0.5171) Bounds: xmin=0.2820, ymin=0.3767, xmax=0.4260, ymax=0.6284
+
+Frame count: 398 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.62 Detection count: 1 Position: center=(0.3540, 0.5171) Bounds: xmin=0.2820, ymin=0.3767, xmax=0.4260, ymax=0.6284
+
+Frame count: 399 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.62 Detection count: 1 Position: center=(0.3540, 0.5171) Bounds: xmin=0.2820, ymin=0.3767, xmax=0.4260, ymax=0.6284
+
+Frame count: 400 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.62 Detection count: 1 Position: center=(0.3540, 0.5171) Bounds: xmin=0.2820, ymin=0.3767, xmax=0.4260, ymax=0.6284
+
+Frame count: 401 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.57 Detection count: 1 Position: center=(0.3631, 0.5372) Bounds: xmin=0.3003, ymin=0.3831, xmax=0.4260, ymax=0.6439
+
+Frame count: 402 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.84 Detection count: 1 Position: center=(0.3611, 0.5386) Bounds: xmin=0.2986, ymin=0.3872, xmax=0.4236, ymax=0.6413
+
+Frame count: 403 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.60 Detection count: 1 Position: center=(0.3594, 0.5625) Bounds: xmin=0.2969, ymin=0.3923, xmax=0.4218, ymax=0.6625
+
+Frame count: 404 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.58 Detection count: 1 Position: center=(0.3586, 0.5759) Bounds: xmin=0.2948, ymin=0.3996, xmax=0.4224, ymax=0.6697
+
+Frame count: 405 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.45 Detection count: 1 Position: center=(0.3605, 0.5668) Bounds: xmin=0.2963, ymin=0.3917, xmax=0.4247, ymax=0.6677
+
+Frame count: 406 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.50 Detection count: 1 Position: center=(0.3669, 0.5532) Bounds: xmin=0.2968, ymin=0.3941, xmax=0.4371, ymax=0.6505
+
+Frame count: 407 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.64 Detection count: 1 Position: center=(0.3672, 0.5505) Bounds: xmin=0.2965, ymin=0.3933, xmax=0.4379, ymax=0.6483
+
+Frame count: 408 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.58 Detection count: 1 Position: center=(0.3693, 0.5436) Bounds: xmin=0.3011, ymin=0.3805, xmax=0.4376, ymax=0.6536
+
+Frame count: 409 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.71 Detection count: 1 Position: center=(0.3741, 0.5650) Bounds: xmin=0.3138, ymin=0.3974, xmax=0.4344, ymax=0.6601
+
+Frame count: 410 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.78 Detection count: 1 Position: center=(0.3756, 0.5809) Bounds: xmin=0.3198, ymin=0.4105, xmax=0.4314, ymax=0.6643
+
+Frame count: 411 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.69 Detection count: 1 Position: center=(0.3776, 0.5907) Bounds: xmin=0.3201, ymin=0.4188, xmax=0.4351, ymax=0.6667
+
+Frame count: 412 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.70 Detection count: 1 Position: center=(0.3792, 0.5933) Bounds: xmin=0.3172, ymin=0.4186, xmax=0.4413, ymax=0.6698
+
+Frame count: 413 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.74 Detection count: 1 Position: center=(0.3802, 0.5792) Bounds: xmin=0.3115, ymin=0.4014, xmax=0.4490, ymax=0.6717
+
+Frame count: 414 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.75 Detection count: 1 Position: center=(0.3796, 0.5954) Bounds: xmin=0.3100, ymin=0.4143, xmax=0.4493, ymax=0.6764
+
+Frame count: 415 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.79 Detection count: 1 Position: center=(0.3825, 0.6120) Bounds: xmin=0.3126, ymin=0.4214, xmax=0.4524, ymax=0.6874
+
+Frame count: 416 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.76 Detection count: 1 Position: center=(0.3832, 0.6306) Bounds: xmin=0.3155, ymin=0.4342, xmax=0.4509, ymax=0.6950
+
+Frame count: 417 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.82 Detection count: 1 Position: center=(0.3799, 0.6536) Bounds: xmin=0.3161, ymin=0.4533, xmax=0.4437, ymax=0.7009
+
+Frame count: 418 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.83 Detection count: 1 Position: center=(0.3796, 0.6597) Bounds: xmin=0.3109, ymin=0.4623, xmax=0.4483, ymax=0.6987
+
+Frame count: 419 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.72 Detection count: 1 Position: center=(0.3783, 0.6776) Bounds: xmin=0.3057, ymin=0.4610, xmax=0.4510, ymax=0.7196
+
+Frame count: 420 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.62 Detection count: 1 Position: center=(0.3771, 0.6859) Bounds: xmin=0.3047, ymin=0.4634, xmax=0.4496, ymax=0.7262
+
+Frame count: 421 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.70 Detection count: 1 Position: center=(0.3752, 0.6873) Bounds: xmin=0.3035, ymin=0.4603, xmax=0.4470, ymax=0.7308
+
+Frame count: 422 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.70 Detection count: 1 Position: center=(0.3752, 0.6873) Bounds: xmin=0.3035, ymin=0.4603, xmax=0.4470, ymax=0.7308
+
+Frame count: 423 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.70 Detection count: 1 Position: center=(0.3752, 0.6873) Bounds: xmin=0.3035, ymin=0.4603, xmax=0.4470, ymax=0.7308
+
+Frame count: 424 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.70 Detection count: 1 Position: center=(0.3752, 0.6873) Bounds: xmin=0.3035, ymin=0.4603, xmax=0.4470, ymax=0.7308
+
+Frame count: 425 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.64 Detection count: 1 Position: center=(0.3653, 0.7073) Bounds: xmin=0.3001, ymin=0.4590, xmax=0.4305, ymax=0.7540
+
+Frame count: 426 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.64 Detection count: 1 Position: center=(0.3653, 0.7073) Bounds: xmin=0.3001, ymin=0.4590, xmax=0.4305, ymax=0.7540
+
+Frame count: 427 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.48 Detection count: 1 Position: center=(0.3736, 0.7024) Bounds: xmin=0.3047, ymin=0.4589, xmax=0.4425, ymax=0.7488
+
+Frame count: 428 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.48 Detection count: 1 Position: center=(0.3736, 0.7024) Bounds: xmin=0.3047, ymin=0.4589, xmax=0.4425, ymax=0.7488
+
+Frame count: 429 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.58 Detection count: 1 Position: center=(0.3663, 0.7092) Bounds: xmin=0.2985, ymin=0.4631, xmax=0.4342, ymax=0.7521
+
+Frame count: 430 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.49 Detection count: 1 Position: center=(0.3708, 0.7042) Bounds: xmin=0.3034, ymin=0.4507, xmax=0.4382, ymax=0.7589
+
+Frame count: 431 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.58 Detection count: 1 Position: center=(0.3716, 0.7094) Bounds: xmin=0.3057, ymin=0.4549, xmax=0.4375, ymax=0.7604
+
+Frame count: 432 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.57 Detection count: 1 Position: center=(0.3702, 0.7150) Bounds: xmin=0.3042, ymin=0.4586, xmax=0.4363, ymax=0.7628
+
+Frame count: 433 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.57 Detection count: 1 Position: center=(0.3702, 0.7150) Bounds: xmin=0.3042, ymin=0.4586, xmax=0.4363, ymax=0.7628
+
+Frame count: 434 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.57 Detection count: 1 Position: center=(0.3702, 0.7150) Bounds: xmin=0.3042, ymin=0.4586, xmax=0.4363, ymax=0.7628
+
+Frame count: 435 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.57 Detection count: 1 Position: center=(0.3702, 0.7150) Bounds: xmin=0.3042, ymin=0.4586, xmax=0.4363, ymax=0.7628
+
+Frame count: 436 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.57 Detection count: 1 Position: center=(0.3702, 0.7150) Bounds: xmin=0.3042, ymin=0.4586, xmax=0.4363, ymax=0.7628
+
+Frame count: 437 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 438 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 439 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 440 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 441 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 442 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 443 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 444 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 445 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 446 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 447 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 448 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 449 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 450 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 451 Width: 1280 Heigth: 720
+Label: Madsen ID: 4 Confidence: 0.51 Detection count: 1 Position: center=(0.3595, 0.7140) Bounds: xmin=0.2860, ymin=0.4560, xmax=0.4329, ymax=0.7644
+
+Frame count: 452 Width: 1280 Heigth: 720
+
+Frame count: 453 Width: 1280 Heigth: 720
+
+Frame count: 454 Width: 1280 Heigth: 720
+
+Frame count: 455 Width: 1280 Heigth: 720
+
+Frame count: 456 Width: 1280 Heigth: 720
+
+Frame count: 457 Width: 1280 Heigth: 720
+
+Frame count: 458 Width: 1280 Heigth: 720
+
+Frame count: 459 Width: 1280 Heigth: 720
+
+Frame count: 460 Width: 1280 Heigth: 720
+
+Frame count: 461 Width: 1280 Heigth: 720
+
+Frame count: 462 Width: 1280 Heigth: 720
+
+Frame count: 463 Width: 1280 Heigth: 720
+
+Frame count: 464 Width: 1280 Heigth: 720
+
+Frame count: 465 Width: 1280 Heigth: 720
+
+Frame count: 466 Width: 1280 Heigth: 720
+
+Frame count: 467 Width: 1280 Heigth: 720
+
+Frame count: 468 Width: 1280 Heigth: 720
+
+Frame count: 469 Width: 1280 Heigth: 720
+
+Frame count: 470 Width: 1280 Heigth: 720
+
+Frame count: 471 Width: 1280 Heigth: 720
+
+Frame count: 472 Width: 1280 Heigth: 720
+
+Frame count: 473 Width: 1280 Heigth: 720
+
+Frame count: 474 Width: 1280 Heigth: 720
+
+Frame count: 475 Width: 1280 Heigth: 720
+
+Frame count: 476 Width: 1280 Heigth: 720
+
+Frame count: 477 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.74 Detection count: 1 Position: center=(0.3382, 0.8713) Bounds: xmin=0.2775, ymin=0.5623, xmax=0.3988, ymax=0.8299
+
+Frame count: 478 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.89 Detection count: 1 Position: center=(0.3312, 0.8430) Bounds: xmin=0.2603, ymin=0.5408, xmax=0.4022, ymax=0.8205
+
+Frame count: 479 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.68 Detection count: 1 Position: center=(0.3262, 0.7071) Bounds: xmin=0.2479, ymin=0.3889, xmax=0.4045, ymax=0.8239
+
+Frame count: 480 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3205, 0.7219) Bounds: xmin=0.2349, ymin=0.4224, xmax=0.4062, ymax=0.8066
+
+Frame count: 481 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.3175, 0.7648) Bounds: xmin=0.2295, ymin=0.4941, xmax=0.4056, ymax=0.7818
+
+Frame count: 482 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.69 Detection count: 1 Position: center=(0.2993, 0.7944) Bounds: xmin=0.1948, ymin=0.5329, xmax=0.4039, ymax=0.7754
+
+Frame count: 483 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.90 Detection count: 1 Position: center=(0.3233, 0.7931) Bounds: xmin=0.2505, ymin=0.5363, xmax=0.3961, ymax=0.7706
+
+Frame count: 484 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.91 Detection count: 1 Position: center=(0.3240, 0.7819) Bounds: xmin=0.2529, ymin=0.5253, xmax=0.3952, ymax=0.7693
+
+Frame count: 485 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.90 Detection count: 1 Position: center=(0.3227, 0.7674) Bounds: xmin=0.2460, ymin=0.5131, xmax=0.3994, ymax=0.7655
+
+Frame count: 486 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.87 Detection count: 1 Position: center=(0.3185, 0.7565) Bounds: xmin=0.2373, ymin=0.5010, xmax=0.3997, ymax=0.7657
+
+Frame count: 487 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.62 Detection count: 1 Position: center=(0.3182, 0.7555) Bounds: xmin=0.2405, ymin=0.5006, xmax=0.3959, ymax=0.7651
+
+Frame count: 488 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.40 Detection count: 1 Position: center=(0.3234, 0.7726) Bounds: xmin=0.2538, ymin=0.5208, xmax=0.3930, ymax=0.7635
+
+Frame count: 489 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.40 Detection count: 1 Position: center=(0.3234, 0.7726) Bounds: xmin=0.2538, ymin=0.5208, xmax=0.3930, ymax=0.7635
+
+Frame count: 490 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.88 Detection count: 1 Position: center=(0.3335, 0.7764) Bounds: xmin=0.2709, ymin=0.5230, xmax=0.3960, ymax=0.7655
+
+Frame count: 491 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.86 Detection count: 1 Position: center=(0.3347, 0.7728) Bounds: xmin=0.2715, ymin=0.5187, xmax=0.3979, ymax=0.7659
+
+Frame count: 492 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.83 Detection count: 1 Position: center=(0.3335, 0.7822) Bounds: xmin=0.2654, ymin=0.5266, xmax=0.4017, ymax=0.7683
+
+Frame count: 493 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.3312, 0.7425) Bounds: xmin=0.2610, ymin=0.4752, xmax=0.4014, ymax=0.7763
+
+Frame count: 494 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.74 Detection count: 1 Position: center=(0.3314, 0.7831) Bounds: xmin=0.2597, ymin=0.5258, xmax=0.4031, ymax=0.7699
+
+Frame count: 495 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.61 Detection count: 1 Position: center=(0.3285, 0.8171) Bounds: xmin=0.2582, ymin=0.5525, xmax=0.3987, ymax=0.7805
+
+Frame count: 496 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.3266, 0.7607) Bounds: xmin=0.2569, ymin=0.4891, xmax=0.3963, ymax=0.7823
+
+Frame count: 497 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.3259, 0.7512) Bounds: xmin=0.2585, ymin=0.4732, xmax=0.3933, ymax=0.7879
+
+Frame count: 498 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3266, 0.7144) Bounds: xmin=0.2577, ymin=0.4268, xmax=0.3954, ymax=0.7940
+
+Frame count: 499 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.3256, 0.7848) Bounds: xmin=0.2511, ymin=0.5097, xmax=0.4000, ymax=0.7880
+
+Frame count: 500 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.3249, 0.7062) Bounds: xmin=0.2507, ymin=0.4066, xmax=0.3991, ymax=0.8053
+
+Frame count: 501 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.3237, 0.6991) Bounds: xmin=0.2510, ymin=0.3974, xmax=0.3964, ymax=0.8067
+
+Frame count: 502 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.86 Detection count: 1 Position: center=(0.3217, 0.7880) Bounds: xmin=0.2446, ymin=0.5093, xmax=0.3988, ymax=0.7918
+
+Frame count: 503 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.89 Detection count: 1 Position: center=(0.3190, 0.8384) Bounds: xmin=0.2484, ymin=0.5621, xmax=0.3896, ymax=0.7942
+
+Frame count: 504 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.88 Detection count: 1 Position: center=(0.3208, 0.8546) Bounds: xmin=0.2524, ymin=0.5767, xmax=0.3893, ymax=0.7972
+
+Frame count: 505 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.90 Detection count: 1 Position: center=(0.3205, 0.8662) Bounds: xmin=0.2537, ymin=0.5820, xmax=0.3874, ymax=0.8047
+
+Frame count: 506 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.88 Detection count: 1 Position: center=(0.3204, 0.8735) Bounds: xmin=0.2526, ymin=0.5864, xmax=0.3881, ymax=0.8083
+
+Frame count: 507 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.90 Detection count: 1 Position: center=(0.3198, 0.8825) Bounds: xmin=0.2495, ymin=0.5887, xmax=0.3901, ymax=0.8158
+
+Frame count: 508 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.89 Detection count: 1 Position: center=(0.3176, 0.8843) Bounds: xmin=0.2453, ymin=0.5878, xmax=0.3898, ymax=0.8186
+
+Frame count: 509 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.88 Detection count: 1 Position: center=(0.3147, 0.8884) Bounds: xmin=0.2400, ymin=0.5880, xmax=0.3894, ymax=0.8229
+
+Frame count: 510 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.85 Detection count: 1 Position: center=(0.3149, 0.8998) Bounds: xmin=0.2382, ymin=0.5981, xmax=0.3915, ymax=0.8253
+
+Frame count: 511 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3155, 0.9040) Bounds: xmin=0.2398, ymin=0.6006, xmax=0.3912, ymax=0.8273
+
+Frame count: 512 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.3190, 0.9097) Bounds: xmin=0.2464, ymin=0.6019, xmax=0.3917, ymax=0.8322
+
+Frame count: 513 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.88 Detection count: 1 Position: center=(0.3238, 0.9260) Bounds: xmin=0.2519, ymin=0.6141, xmax=0.3956, ymax=0.8379
+
+Frame count: 514 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.90 Detection count: 1 Position: center=(0.3262, 0.9395) Bounds: xmin=0.2510, ymin=0.6267, xmax=0.4013, ymax=0.8400
+
+Frame count: 515 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.3256, 0.9372) Bounds: xmin=0.2459, ymin=0.6225, xmax=0.4054, ymax=0.8418
+
+Frame count: 516 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.86 Detection count: 1 Position: center=(0.3255, 0.9315) Bounds: xmin=0.2466, ymin=0.6143, xmax=0.4043, ymax=0.8437
+
+Frame count: 517 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3264, 0.9345) Bounds: xmin=0.2522, ymin=0.6181, xmax=0.4007, ymax=0.8432
+
+Frame count: 518 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.3277, 0.9186) Bounds: xmin=0.2565, ymin=0.5967, xmax=0.3990, ymax=0.8473
+
+Frame count: 519 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3273, 0.9222) Bounds: xmin=0.2545, ymin=0.5902, xmax=0.4001, ymax=0.8577
+
+Frame count: 520 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.79 Detection count: 1 Position: center=(0.3269, 0.9215) Bounds: xmin=0.2526, ymin=0.5796, xmax=0.4012, ymax=0.8675
+
+Frame count: 521 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.89 Detection count: 1 Position: center=(0.3276, 0.9274) Bounds: xmin=0.2531, ymin=0.5850, xmax=0.4021, ymax=0.8685
+
+Frame count: 522 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.3276, 0.9385) Bounds: xmin=0.2515, ymin=0.6021, xmax=0.4037, ymax=0.8636
+
+Frame count: 523 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3280, 0.9585) Bounds: xmin=0.2500, ymin=0.6281, xmax=0.4059, ymax=0.8594
+
+Frame count: 524 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3301, 0.9581) Bounds: xmin=0.2483, ymin=0.6302, xmax=0.4119, ymax=0.8569
+
+Frame count: 525 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.3287, 0.9670) Bounds: xmin=0.2478, ymin=0.6400, xmax=0.4095, ymax=0.8568
+
+Frame count: 526 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3290, 0.9554) Bounds: xmin=0.2521, ymin=0.6306, xmax=0.4060, ymax=0.8536
+
+Frame count: 527 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.89 Detection count: 1 Position: center=(0.3314, 0.9620) Bounds: xmin=0.2568, ymin=0.6383, xmax=0.4060, ymax=0.8530
+
+Frame count: 528 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.87 Detection count: 1 Position: center=(0.3341, 0.9623) Bounds: xmin=0.2569, ymin=0.6391, xmax=0.4113, ymax=0.8526
+
+Frame count: 529 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3342, 0.9567) Bounds: xmin=0.2518, ymin=0.6348, xmax=0.4167, ymax=0.8507
+
+Frame count: 530 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3389, 0.9580) Bounds: xmin=0.2515, ymin=0.6376, xmax=0.4262, ymax=0.8494
+
+Frame count: 531 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.3417, 0.9455) Bounds: xmin=0.2524, ymin=0.6254, xmax=0.4310, ymax=0.8479
+
+Frame count: 532 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.74 Detection count: 1 Position: center=(0.3467, 0.9381) Bounds: xmin=0.2567, ymin=0.6223, xmax=0.4368, ymax=0.8429
+
+Frame count: 533 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.66 Detection count: 1 Position: center=(0.3486, 0.9337) Bounds: xmin=0.2577, ymin=0.6276, xmax=0.4394, ymax=0.8328
+
+Frame count: 534 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.3500, 0.9261) Bounds: xmin=0.2589, ymin=0.6295, xmax=0.4412, ymax=0.8226
+
+Frame count: 535 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.3494, 0.9168) Bounds: xmin=0.2606, ymin=0.6237, xmax=0.4383, ymax=0.8182
+
+Frame count: 536 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3495, 0.9041) Bounds: xmin=0.2618, ymin=0.6182, xmax=0.4371, ymax=0.8099
+
+Frame count: 537 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3495, 0.9041) Bounds: xmin=0.2618, ymin=0.6182, xmax=0.4371, ymax=0.8099
+
+Frame count: 538 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3492, 0.8708) Bounds: xmin=0.2629, ymin=0.6035, xmax=0.4355, ymax=0.7882
+
+Frame count: 539 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 540 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 541 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 542 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 543 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 544 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 545 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 546 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 547 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3482, 0.8527) Bounds: xmin=0.2648, ymin=0.5927, xmax=0.4317, ymax=0.7793
+
+Frame count: 548 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.3558, 0.7851) Bounds: xmin=0.2575, ymin=0.5725, xmax=0.4541, ymax=0.7255
+
+Frame count: 549 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3499, 0.7755) Bounds: xmin=0.2657, ymin=0.5685, xmax=0.4341, ymax=0.7190
+
+Frame count: 550 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3507, 0.7681) Bounds: xmin=0.2701, ymin=0.5653, xmax=0.4314, ymax=0.7142
+
+Frame count: 551 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.3498, 0.7599) Bounds: xmin=0.2720, ymin=0.5636, xmax=0.4275, ymax=0.7069
+
+Frame count: 552 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3511, 0.7544) Bounds: xmin=0.2720, ymin=0.5593, xmax=0.4302, ymax=0.7052
+
+Frame count: 553 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.3525, 0.7485) Bounds: xmin=0.2726, ymin=0.5583, xmax=0.4324, ymax=0.6997
+
+Frame count: 554 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.74 Detection count: 1 Position: center=(0.3536, 0.7488) Bounds: xmin=0.2744, ymin=0.5582, xmax=0.4327, ymax=0.7001
+
+Frame count: 555 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3540, 0.7475) Bounds: xmin=0.2755, ymin=0.5594, xmax=0.4326, ymax=0.6975
+
+Frame count: 556 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3558, 0.7462) Bounds: xmin=0.2752, ymin=0.5615, xmax=0.4363, ymax=0.6940
+
+Frame count: 557 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3558, 0.7462) Bounds: xmin=0.2752, ymin=0.5615, xmax=0.4363, ymax=0.6940
+
+Frame count: 558 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3558, 0.7462) Bounds: xmin=0.2752, ymin=0.5615, xmax=0.4363, ymax=0.6940
+
+Frame count: 559 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3558, 0.7462) Bounds: xmin=0.2752, ymin=0.5615, xmax=0.4363, ymax=0.6940
+
+Frame count: 560 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.47 Detection count: 1 Position: center=(0.3720, 0.7484) Bounds: xmin=0.2748, ymin=0.5481, xmax=0.4693, ymax=0.7098
+
+Frame count: 561 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.47 Detection count: 1 Position: center=(0.3720, 0.7484) Bounds: xmin=0.2748, ymin=0.5481, xmax=0.4693, ymax=0.7098
+
+Frame count: 562 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.60 Detection count: 1 Position: center=(0.3803, 0.7499) Bounds: xmin=0.2819, ymin=0.5444, xmax=0.4787, ymax=0.7152
+
+Frame count: 563 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.41 Detection count: 1 Position: center=(0.3869, 0.7548) Bounds: xmin=0.2913, ymin=0.5439, xmax=0.4826, ymax=0.7210
+
+Frame count: 564 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.41 Detection count: 1 Position: center=(0.3869, 0.7548) Bounds: xmin=0.2913, ymin=0.5439, xmax=0.4826, ymax=0.7210
+
+Frame count: 565 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.41 Detection count: 1 Position: center=(0.3869, 0.7548) Bounds: xmin=0.2913, ymin=0.5439, xmax=0.4826, ymax=0.7210
+
+Frame count: 566 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.46 Detection count: 1 Position: center=(0.3905, 0.7529) Bounds: xmin=0.2975, ymin=0.5440, xmax=0.4834, ymax=0.7189
+
+Frame count: 567 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.46 Detection count: 1 Position: center=(0.3905, 0.7529) Bounds: xmin=0.2975, ymin=0.5440, xmax=0.4834, ymax=0.7189
+
+Frame count: 568 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.42 Detection count: 1 Position: center=(0.3903, 0.7629) Bounds: xmin=0.2979, ymin=0.5486, xmax=0.4828, ymax=0.7252
+
+Frame count: 569 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.3902, 0.7651) Bounds: xmin=0.2972, ymin=0.5468, xmax=0.4832, ymax=0.7294
+
+Frame count: 570 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.45 Detection count: 1 Position: center=(0.3897, 0.7650) Bounds: xmin=0.2966, ymin=0.5424, xmax=0.4827, ymax=0.7337
+
+Frame count: 571 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.60 Detection count: 1 Position: center=(0.3895, 0.7578) Bounds: xmin=0.2974, ymin=0.5324, xmax=0.4816, ymax=0.7358
+
+Frame count: 572 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.48 Detection count: 1 Position: center=(0.3900, 0.7638) Bounds: xmin=0.2980, ymin=0.5370, xmax=0.4819, ymax=0.7378
+
+Frame count: 573 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.3909, 0.7820) Bounds: xmin=0.2987, ymin=0.5548, xmax=0.4830, ymax=0.7398
+
+Frame count: 574 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.3909, 0.7820) Bounds: xmin=0.2987, ymin=0.5548, xmax=0.4830, ymax=0.7398
+
+Frame count: 575 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3907, 0.7934) Bounds: xmin=0.2980, ymin=0.5615, xmax=0.4833, ymax=0.7456
+
+Frame count: 576 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3897, 0.8066) Bounds: xmin=0.2963, ymin=0.5755, xmax=0.4830, ymax=0.7460
+
+Frame count: 577 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3886, 0.8065) Bounds: xmin=0.2953, ymin=0.5702, xmax=0.4819, ymax=0.7512
+
+Frame count: 578 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3884, 0.8124) Bounds: xmin=0.2947, ymin=0.5722, xmax=0.4821, ymax=0.7556
+
+Frame count: 579 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.41 Detection count: 1 Position: center=(0.3900, 0.8178) Bounds: xmin=0.2948, ymin=0.5728, xmax=0.4852, ymax=0.7610
+
+Frame count: 580 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.69 Detection count: 1 Position: center=(0.3881, 0.8226) Bounds: xmin=0.2949, ymin=0.5757, xmax=0.4813, ymax=0.7634
+
+Frame count: 581 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.69 Detection count: 1 Position: center=(0.3879, 0.8277) Bounds: xmin=0.2946, ymin=0.5742, xmax=0.4811, ymax=0.7705
+
+Frame count: 582 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3869, 0.8291) Bounds: xmin=0.2941, ymin=0.5710, xmax=0.4797, ymax=0.7751
+
+Frame count: 583 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.3889, 0.8349) Bounds: xmin=0.2968, ymin=0.5710, xmax=0.4809, ymax=0.7814
+
+Frame count: 584 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.3902, 0.8370) Bounds: xmin=0.2992, ymin=0.5713, xmax=0.4812, ymax=0.7834
+
+Frame count: 585 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.87 Detection count: 1 Position: center=(0.3911, 0.8355) Bounds: xmin=0.3010, ymin=0.5702, xmax=0.4813, ymax=0.7829
+
+Frame count: 586 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3943, 0.8354) Bounds: xmin=0.2985, ymin=0.5674, xmax=0.4901, ymax=0.7856
+
+Frame count: 587 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3954, 0.8341) Bounds: xmin=0.2969, ymin=0.5655, xmax=0.4938, ymax=0.7861
+
+Frame count: 588 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.73 Detection count: 1 Position: center=(0.3977, 0.8327) Bounds: xmin=0.2962, ymin=0.5625, xmax=0.4992, ymax=0.7875
+
+Frame count: 589 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.4001, 0.8333) Bounds: xmin=0.2977, ymin=0.5618, xmax=0.5024, ymax=0.7889
+
+Frame count: 590 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.4013, 0.8388) Bounds: xmin=0.3005, ymin=0.5621, xmax=0.5022, ymax=0.7947
+
+Frame count: 591 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.74 Detection count: 1 Position: center=(0.4018, 0.8395) Bounds: xmin=0.3016, ymin=0.5611, xmax=0.5020, ymax=0.7963
+
+Frame count: 592 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.64 Detection count: 1 Position: center=(0.4005, 0.8419) Bounds: xmin=0.3011, ymin=0.5653, xmax=0.5000, ymax=0.7948
+
+Frame count: 593 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.68 Detection count: 1 Position: center=(0.4009, 0.8337) Bounds: xmin=0.3017, ymin=0.5585, xmax=0.5002, ymax=0.7926
+
+Frame count: 594 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.4002, 0.8259) Bounds: xmin=0.3009, ymin=0.5536, xmax=0.4994, ymax=0.7891
+
+Frame count: 595 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.70 Detection count: 1 Position: center=(0.4010, 0.8211) Bounds: xmin=0.3000, ymin=0.5496, xmax=0.5020, ymax=0.7878
+
+Frame count: 596 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.4003, 0.8127) Bounds: xmin=0.2990, ymin=0.5453, xmax=0.5016, ymax=0.7829
+
+Frame count: 597 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.3997, 0.8070) Bounds: xmin=0.2993, ymin=0.5430, xmax=0.5001, ymax=0.7789
+
+Frame count: 598 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.69 Detection count: 1 Position: center=(0.3990, 0.8033) Bounds: xmin=0.2982, ymin=0.5404, xmax=0.4997, ymax=0.7775
+
+Frame count: 599 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.76 Detection count: 1 Position: center=(0.3988, 0.8020) Bounds: xmin=0.2974, ymin=0.5387, xmax=0.5002, ymax=0.7777
+
+Frame count: 600 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3990, 0.7979) Bounds: xmin=0.2971, ymin=0.5347, xmax=0.5009, ymax=0.7773
+
+Frame count: 601 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3985, 0.7937) Bounds: xmin=0.2977, ymin=0.5317, xmax=0.4993, ymax=0.7757
+
+Frame count: 602 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.3981, 0.7916) Bounds: xmin=0.2974, ymin=0.5291, xmax=0.4988, ymax=0.7760
+
+Frame count: 603 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.3982, 0.7895) Bounds: xmin=0.2977, ymin=0.5276, xmax=0.4986, ymax=0.7753
+
+Frame count: 604 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.3975, 0.7883) Bounds: xmin=0.2963, ymin=0.5272, xmax=0.4987, ymax=0.7743
+
+Frame count: 605 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.79 Detection count: 1 Position: center=(0.3984, 0.7883) Bounds: xmin=0.2978, ymin=0.5276, xmax=0.4989, ymax=0.7739
+
+Frame count: 606 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.3984, 0.7891) Bounds: xmin=0.2978, ymin=0.5287, xmax=0.4991, ymax=0.7737
+
+Frame count: 607 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.3978, 0.7884) Bounds: xmin=0.2974, ymin=0.5297, xmax=0.4982, ymax=0.7719
+
+Frame count: 608 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.3982, 0.7881) Bounds: xmin=0.2981, ymin=0.5318, xmax=0.4983, ymax=0.7696
+
+Frame count: 609 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.3986, 0.7873) Bounds: xmin=0.2983, ymin=0.5322, xmax=0.4989, ymax=0.7682
+
+Frame count: 610 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.46 Detection count: 1 Position: center=(0.3995, 0.7879) Bounds: xmin=0.2997, ymin=0.5319, xmax=0.4992, ymax=0.7692
+
+Frame count: 611 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.46 Detection count: 1 Position: center=(0.3995, 0.7879) Bounds: xmin=0.2997, ymin=0.5319, xmax=0.4992, ymax=0.7692
+
+Frame count: 612 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4003, 0.7856) Bounds: xmin=0.3015, ymin=0.5329, xmax=0.4991, ymax=0.7656
+
+Frame count: 613 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4001, 0.7838) Bounds: xmin=0.3012, ymin=0.5325, xmax=0.4990, ymax=0.7641
+
+Frame count: 614 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.3998, 0.7816) Bounds: xmin=0.3006, ymin=0.5312, xmax=0.4989, ymax=0.7630
+
+Frame count: 615 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.57 Detection count: 1 Position: center=(0.3998, 0.7810) Bounds: xmin=0.3010, ymin=0.5306, xmax=0.4986, ymax=0.7630
+
+Frame count: 616 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.66 Detection count: 1 Position: center=(0.3993, 0.7775) Bounds: xmin=0.3017, ymin=0.5316, xmax=0.4970, ymax=0.7581
+
+Frame count: 617 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.61 Detection count: 1 Position: center=(0.4018, 0.8159) Bounds: xmin=0.3016, ymin=0.5294, xmax=0.5020, ymax=0.8024
+
+Frame count: 618 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.61 Detection count: 1 Position: center=(0.4013, 0.7923) Bounds: xmin=0.3020, ymin=0.5313, xmax=0.5005, ymax=0.7746
+
+Frame count: 619 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4005, 0.7773) Bounds: xmin=0.3020, ymin=0.5314, xmax=0.4989, ymax=0.7581
+
+Frame count: 620 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.3993, 0.7710) Bounds: xmin=0.3011, ymin=0.5276, xmax=0.4975, ymax=0.7550
+
+Frame count: 621 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3987, 0.7666) Bounds: xmin=0.3008, ymin=0.5233, xmax=0.4966, ymax=0.7545
+
+Frame count: 622 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.70 Detection count: 1 Position: center=(0.3987, 0.7636) Bounds: xmin=0.3005, ymin=0.5199, xmax=0.4968, ymax=0.7547
+
+Frame count: 623 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.3995, 0.7627) Bounds: xmin=0.3008, ymin=0.5184, xmax=0.4983, ymax=0.7552
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 624 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.66 Detection count: 1 Position: center=(0.4000, 0.7632) Bounds: xmin=0.3019, ymin=0.5175, xmax=0.4982, ymax=0.7566
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 625 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.73 Detection count: 1 Position: center=(0.4004, 0.7612) Bounds: xmin=0.3028, ymin=0.5169, xmax=0.4981, ymax=0.7549
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 626 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.72 Detection count: 1 Position: center=(0.4004, 0.7615) Bounds: xmin=0.3026, ymin=0.5174, xmax=0.4982, ymax=0.7548
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 627 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.4006, 0.7598) Bounds: xmin=0.3035, ymin=0.5167, xmax=0.4977, ymax=0.7538
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 628 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.4007, 0.7576) Bounds: xmin=0.3037, ymin=0.5151, xmax=0.4976, ymax=0.7529
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 629 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.76 Detection count: 1 Position: center=(0.4011, 0.7568) Bounds: xmin=0.3037, ymin=0.5150, xmax=0.4986, ymax=0.7521
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 630 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.4019, 0.7579) Bounds: xmin=0.3045, ymin=0.5149, xmax=0.4993, ymax=0.7535
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 631 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.4030, 0.7575) Bounds: xmin=0.3055, ymin=0.5145, xmax=0.5004, ymax=0.7534
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 632 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4036, 0.7579) Bounds: xmin=0.3054, ymin=0.5143, xmax=0.5019, ymax=0.7540
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 633 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.70 Detection count: 1 Position: center=(0.4042, 0.7540) Bounds: xmin=0.3044, ymin=0.5131, xmax=0.5040, ymax=0.7509
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 634 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.76 Detection count: 1 Position: center=(0.4041, 0.7453) Bounds: xmin=0.3047, ymin=0.5121, xmax=0.5035, ymax=0.7424
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 635 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.74 Detection count: 1 Position: center=(0.4051, 0.7363) Bounds: xmin=0.3071, ymin=0.5088, xmax=0.5032, ymax=0.7359
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 636 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4064, 0.7288) Bounds: xmin=0.3086, ymin=0.5051, xmax=0.5041, ymax=0.7313
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 637 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.4064, 0.7255) Bounds: xmin=0.3089, ymin=0.5027, xmax=0.5039, ymax=0.7301
+Label: Madsen ID: 6 Confidence: 0.50 Detection count: 2 Position: center=(0.9723, -0.0059) Bounds: xmin=0.9439, ymin=0.1109, xmax=1.0007, ymax=0.3226
+
+Frame count: 638 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.4055, 0.7222) Bounds: xmin=0.3077, ymin=0.4993, xmax=0.5034, ymax=0.7301
+
+Frame count: 639 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.4043, 0.7198) Bounds: xmin=0.3062, ymin=0.4992, xmax=0.5023, ymax=0.7274
+
+Frame count: 640 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.4058, 0.7161) Bounds: xmin=0.3095, ymin=0.5035, xmax=0.5020, ymax=0.7192
+
+Frame count: 641 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.4067, 0.7165) Bounds: xmin=0.3119, ymin=0.5042, xmax=0.5016, ymax=0.7189
+
+Frame count: 642 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.66 Detection count: 1 Position: center=(0.4081, 0.7144) Bounds: xmin=0.3168, ymin=0.5054, xmax=0.4993, ymax=0.7154
+
+Frame count: 643 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.53 Detection count: 1 Position: center=(0.4097, 0.7110) Bounds: xmin=0.3204, ymin=0.5039, xmax=0.4991, ymax=0.7131
+
+Frame count: 644 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.64 Detection count: 1 Position: center=(0.4107, 0.7061) Bounds: xmin=0.3222, ymin=0.4998, xmax=0.4992, ymax=0.7119
+
+Frame count: 645 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4117, 0.7011) Bounds: xmin=0.3235, ymin=0.4925, xmax=0.4998, ymax=0.7138
+
+Frame count: 646 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.79 Detection count: 1 Position: center=(0.4135, 0.6925) Bounds: xmin=0.3257, ymin=0.4825, xmax=0.5014, ymax=0.7143
+
+Frame count: 647 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.4162, 0.6922) Bounds: xmin=0.3297, ymin=0.4775, xmax=0.5026, ymax=0.7189
+
+Frame count: 648 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.84 Detection count: 1 Position: center=(0.4185, 0.6925) Bounds: xmin=0.3329, ymin=0.4751, xmax=0.5040, ymax=0.7217
+
+Frame count: 649 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.86 Detection count: 1 Position: center=(0.4189, 0.6938) Bounds: xmin=0.3335, ymin=0.4743, xmax=0.5043, ymax=0.7240
+
+Frame count: 650 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.88 Detection count: 1 Position: center=(0.4190, 0.6950) Bounds: xmin=0.3325, ymin=0.4727, xmax=0.5056, ymax=0.7269
+
+Frame count: 651 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.88 Detection count: 1 Position: center=(0.4179, 0.6950) Bounds: xmin=0.3286, ymin=0.4727, xmax=0.5072, ymax=0.7269
+
+Frame count: 652 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.83 Detection count: 1 Position: center=(0.4179, 0.6968) Bounds: xmin=0.3277, ymin=0.4742, xmax=0.5081, ymax=0.7274
+
+Frame count: 653 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4200, 0.6948) Bounds: xmin=0.3318, ymin=0.4724, xmax=0.5083, ymax=0.7270
+
+Frame count: 654 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4210, 0.6913) Bounds: xmin=0.3344, ymin=0.4711, xmax=0.5075, ymax=0.7244
+
+Frame count: 655 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.72 Detection count: 1 Position: center=(0.4214, 0.6860) Bounds: xmin=0.3353, ymin=0.4706, xmax=0.5074, ymax=0.7191
+
+Frame count: 656 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4220, 0.6829) Bounds: xmin=0.3362, ymin=0.4692, xmax=0.5077, ymax=0.7171
+
+Frame count: 657 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.76 Detection count: 1 Position: center=(0.4222, 0.6844) Bounds: xmin=0.3359, ymin=0.4682, xmax=0.5084, ymax=0.7198
+
+Frame count: 658 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4225, 0.6765) Bounds: xmin=0.3364, ymin=0.4719, xmax=0.5085, ymax=0.7074
+
+Frame count: 659 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4229, 0.6745) Bounds: xmin=0.3375, ymin=0.4724, xmax=0.5084, ymax=0.7047
+
+Frame count: 660 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.72 Detection count: 1 Position: center=(0.4228, 0.6590) Bounds: xmin=0.3363, ymin=0.4714, xmax=0.5092, ymax=0.6889
+
+Frame count: 661 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.64 Detection count: 1 Position: center=(0.4237, 0.6528) Bounds: xmin=0.3383, ymin=0.4700, xmax=0.5092, ymax=0.6834
+
+Frame count: 662 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4258, 0.6758) Bounds: xmin=0.3404, ymin=0.4703, xmax=0.5111, ymax=0.7083
+
+Frame count: 663 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.62 Detection count: 1 Position: center=(0.4274, 0.7028) Bounds: xmin=0.3448, ymin=0.4778, xmax=0.5101, ymax=0.7303
+
+Frame count: 664 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4295, 0.7221) Bounds: xmin=0.3502, ymin=0.4835, xmax=0.5089, ymax=0.7456
+
+Frame count: 665 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.66 Detection count: 1 Position: center=(0.4330, 0.7388) Bounds: xmin=0.3542, ymin=0.4866, xmax=0.5118, ymax=0.7608
+
+Frame count: 666 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.74 Detection count: 1 Position: center=(0.4342, 0.7419) Bounds: xmin=0.3549, ymin=0.4894, xmax=0.5134, ymax=0.7614
+
+Frame count: 667 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.4338, 0.7452) Bounds: xmin=0.3537, ymin=0.4915, xmax=0.5139, ymax=0.7630
+
+Frame count: 668 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.4354, 0.7506) Bounds: xmin=0.3548, ymin=0.4918, xmax=0.5160, ymax=0.7686
+
+Frame count: 669 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.87 Detection count: 1 Position: center=(0.4376, 0.7545) Bounds: xmin=0.3571, ymin=0.4919, xmax=0.5180, ymax=0.7727
+
+Frame count: 670 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.87 Detection count: 1 Position: center=(0.4385, 0.7520) Bounds: xmin=0.3607, ymin=0.4903, xmax=0.5162, ymax=0.7716
+
+Frame count: 671 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.83 Detection count: 1 Position: center=(0.4380, 0.7487) Bounds: xmin=0.3612, ymin=0.4861, xmax=0.5149, ymax=0.7721
+
+Frame count: 672 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.4377, 0.7504) Bounds: xmin=0.3600, ymin=0.4840, xmax=0.5154, ymax=0.7761
+
+Frame count: 673 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.66 Detection count: 1 Position: center=(0.4379, 0.7504) Bounds: xmin=0.3584, ymin=0.4801, xmax=0.5175, ymax=0.7800
+
+Frame count: 674 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.4391, 0.7589) Bounds: xmin=0.3597, ymin=0.4786, xmax=0.5186, ymax=0.7908
+
+Frame count: 675 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4419, 0.7640) Bounds: xmin=0.3643, ymin=0.4760, xmax=0.5195, ymax=0.7990
+
+Frame count: 676 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.62 Detection count: 1 Position: center=(0.4457, 0.7684) Bounds: xmin=0.3719, ymin=0.4758, xmax=0.5196, ymax=0.8040
+
+Frame count: 677 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.62 Detection count: 1 Position: center=(0.4457, 0.7684) Bounds: xmin=0.3719, ymin=0.4758, xmax=0.5196, ymax=0.8040
+
+Frame count: 678 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4505, 0.7776) Bounds: xmin=0.3789, ymin=0.4767, xmax=0.5221, ymax=0.8132
+
+Frame count: 679 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4505, 0.7776) Bounds: xmin=0.3789, ymin=0.4767, xmax=0.5221, ymax=0.8132
+
+Frame count: 680 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4518, 0.7911) Bounds: xmin=0.3777, ymin=0.4790, xmax=0.5258, ymax=0.8256
+
+Frame count: 681 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.53 Detection count: 1 Position: center=(0.4532, 0.7946) Bounds: xmin=0.3786, ymin=0.4800, xmax=0.5278, ymax=0.8284
+
+Frame count: 682 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.4551, 0.8001) Bounds: xmin=0.3821, ymin=0.4790, xmax=0.5282, ymax=0.8355
+
+Frame count: 683 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 684 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 685 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 686 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 687 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 688 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 689 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 690 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 691 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 692 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 693 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 694 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 695 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 696 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 697 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4562, 0.8043) Bounds: xmin=0.3832, ymin=0.4797, xmax=0.5292, ymax=0.8393
+
+Frame count: 698 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4507, 0.8252) Bounds: xmin=0.3748, ymin=0.5465, xmax=0.5265, ymax=0.7953
+
+Frame count: 699 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.4545, 0.7877) Bounds: xmin=0.3823, ymin=0.5125, xmax=0.5266, ymax=0.7884
+
+Frame count: 700 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.79 Detection count: 1 Position: center=(0.4547, 0.7837) Bounds: xmin=0.3838, ymin=0.5118, xmax=0.5255, ymax=0.7848
+
+Frame count: 701 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.70 Detection count: 1 Position: center=(0.4554, 0.8040) Bounds: xmin=0.3829, ymin=0.5299, xmax=0.5279, ymax=0.7888
+
+Frame count: 702 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.65 Detection count: 1 Position: center=(0.4557, 0.7947) Bounds: xmin=0.3833, ymin=0.5205, xmax=0.5281, ymax=0.7880
+
+Frame count: 703 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.55 Detection count: 1 Position: center=(0.4562, 0.8189) Bounds: xmin=0.3832, ymin=0.5216, xmax=0.5292, ymax=0.8133
+
+Frame count: 704 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.69 Detection count: 1 Position: center=(0.4548, 0.8192) Bounds: xmin=0.3805, ymin=0.5299, xmax=0.5292, ymax=0.8054
+
+Frame count: 705 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.68 Detection count: 1 Position: center=(0.4508, 0.7958) Bounds: xmin=0.3732, ymin=0.5102, xmax=0.5283, ymax=0.7996
+
+Frame count: 706 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.4494, 0.7920) Bounds: xmin=0.3701, ymin=0.5081, xmax=0.5288, ymax=0.7975
+
+Frame count: 707 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.4476, 0.8108) Bounds: xmin=0.3642, ymin=0.5334, xmax=0.5310, ymax=0.7927
+
+Frame count: 708 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4459, 0.8212) Bounds: xmin=0.3594, ymin=0.5435, xmax=0.5324, ymax=0.7941
+
+Frame count: 709 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.4452, 0.8238) Bounds: xmin=0.3580, ymin=0.5448, xmax=0.5325, ymax=0.7955
+
+Frame count: 710 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.64 Detection count: 1 Position: center=(0.4438, 0.8185) Bounds: xmin=0.3565, ymin=0.5421, xmax=0.5312, ymax=0.7924
+
+Frame count: 711 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.56 Detection count: 1 Position: center=(0.4414, 0.8180) Bounds: xmin=0.3501, ymin=0.5354, xmax=0.5327, ymax=0.7986
+
+Frame count: 712 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4395, 0.8219) Bounds: xmin=0.3461, ymin=0.5363, xmax=0.5330, ymax=0.8019
+
+Frame count: 713 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4395, 0.8219) Bounds: xmin=0.3461, ymin=0.5363, xmax=0.5330, ymax=0.8019
+
+Frame count: 714 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4395, 0.8219) Bounds: xmin=0.3461, ymin=0.5363, xmax=0.5330, ymax=0.8019
+
+Frame count: 715 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.4393, 0.8273) Bounds: xmin=0.3448, ymin=0.5324, xmax=0.5338, ymax=0.8118
+
+Frame count: 716 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.55 Detection count: 1 Position: center=(0.4387, 0.8281) Bounds: xmin=0.3408, ymin=0.5323, xmax=0.5365, ymax=0.8127
+
+Frame count: 717 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.41 Detection count: 1 Position: center=(0.4415, 0.8320) Bounds: xmin=0.3428, ymin=0.5334, xmax=0.5402, ymax=0.8159
+
+Frame count: 718 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.53 Detection count: 1 Position: center=(0.4484, 0.8303) Bounds: xmin=0.3521, ymin=0.5354, xmax=0.5448, ymax=0.8121
+
+Frame count: 719 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.44 Detection count: 1 Position: center=(0.4514, 0.8299) Bounds: xmin=0.3562, ymin=0.5368, xmax=0.5466, ymax=0.8102
+
+Frame count: 720 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4536, 0.8329) Bounds: xmin=0.3609, ymin=0.5422, xmax=0.5462, ymax=0.8081
+
+Frame count: 721 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4536, 0.8329) Bounds: xmin=0.3609, ymin=0.5422, xmax=0.5462, ymax=0.8081
+
+Frame count: 722 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4536, 0.8329) Bounds: xmin=0.3609, ymin=0.5422, xmax=0.5462, ymax=0.8081
+
+Frame count: 723 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4559, 0.8317) Bounds: xmin=0.3647, ymin=0.5473, xmax=0.5471, ymax=0.8016
+
+Frame count: 724 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4559, 0.8317) Bounds: xmin=0.3647, ymin=0.5473, xmax=0.5471, ymax=0.8016
+
+Frame count: 725 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4559, 0.8317) Bounds: xmin=0.3647, ymin=0.5473, xmax=0.5471, ymax=0.8016
+
+Frame count: 726 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4559, 0.8317) Bounds: xmin=0.3647, ymin=0.5473, xmax=0.5471, ymax=0.8016
+
+Frame count: 727 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4559, 0.8317) Bounds: xmin=0.3647, ymin=0.5473, xmax=0.5471, ymax=0.8016
+
+Frame count: 728 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.42 Detection count: 1 Position: center=(0.4585, 0.8262) Bounds: xmin=0.3709, ymin=0.5401, xmax=0.5461, ymax=0.8028
+
+Frame count: 729 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.57 Detection count: 1 Position: center=(0.4576, 0.8249) Bounds: xmin=0.3709, ymin=0.5406, xmax=0.5443, ymax=0.8010
+
+Frame count: 730 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.45 Detection count: 1 Position: center=(0.4574, 0.8222) Bounds: xmin=0.3695, ymin=0.5421, xmax=0.5453, ymax=0.7965
+
+Frame count: 731 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.57 Detection count: 1 Position: center=(0.4588, 0.8172) Bounds: xmin=0.3715, ymin=0.5408, xmax=0.5462, ymax=0.7924
+
+Frame count: 732 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.41 Detection count: 1 Position: center=(0.4587, 0.8114) Bounds: xmin=0.3722, ymin=0.5412, xmax=0.5452, ymax=0.7857
+
+Frame count: 733 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.42 Detection count: 1 Position: center=(0.4591, 0.8087) Bounds: xmin=0.3723, ymin=0.5401, xmax=0.5459, ymax=0.7837
+
+Frame count: 734 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 735 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 736 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 737 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 738 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 739 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 740 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 741 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 742 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 743 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 744 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 745 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 746 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.52 Detection count: 1 Position: center=(0.4590, 0.8031) Bounds: xmin=0.3724, ymin=0.5380, xmax=0.5455, ymax=0.7796
+
+Frame count: 747 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.4688, 0.7726) Bounds: xmin=0.3844, ymin=0.5269, xmax=0.5533, ymax=0.7575
+
+Frame count: 748 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.4688, 0.7726) Bounds: xmin=0.3844, ymin=0.5269, xmax=0.5533, ymax=0.7575
+
+Frame count: 749 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4653, 0.7664) Bounds: xmin=0.3787, ymin=0.5315, xmax=0.5519, ymax=0.7462
+
+Frame count: 750 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4653, 0.7664) Bounds: xmin=0.3787, ymin=0.5315, xmax=0.5519, ymax=0.7462
+
+Frame count: 751 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4653, 0.7664) Bounds: xmin=0.3787, ymin=0.5315, xmax=0.5519, ymax=0.7462
+
+Frame count: 752 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4653, 0.7664) Bounds: xmin=0.3787, ymin=0.5315, xmax=0.5519, ymax=0.7462
+
+Frame count: 753 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 754 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 755 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 756 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 757 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 758 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 759 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 760 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 761 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 762 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 763 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 764 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 765 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 766 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 767 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.51 Detection count: 1 Position: center=(0.4729, 0.7681) Bounds: xmin=0.3884, ymin=0.5483, xmax=0.5574, ymax=0.7311
+
+Frame count: 768 Width: 1280 Heigth: 720
+
+Frame count: 769 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.4580, 0.7935) Bounds: xmin=0.3712, ymin=0.4922, xmax=0.5448, ymax=0.8150
+
+Frame count: 770 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.57 Detection count: 1 Position: center=(0.4558, 0.7880) Bounds: xmin=0.3679, ymin=0.4862, xmax=0.5436, ymax=0.8150
+
+Frame count: 771 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.42 Detection count: 1 Position: center=(0.4519, 0.7692) Bounds: xmin=0.3617, ymin=0.4833, xmax=0.5422, ymax=0.7974
+
+Frame count: 772 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4494, 0.7533) Bounds: xmin=0.3583, ymin=0.4836, xmax=0.5404, ymax=0.7797
+
+Frame count: 773 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4510, 0.7411) Bounds: xmin=0.3621, ymin=0.4754, xmax=0.5398, ymax=0.7746
+
+Frame count: 774 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4510, 0.7411) Bounds: xmin=0.3621, ymin=0.4754, xmax=0.5398, ymax=0.7746
+
+Frame count: 775 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4510, 0.7411) Bounds: xmin=0.3621, ymin=0.4754, xmax=0.5398, ymax=0.7746
+
+Frame count: 776 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4510, 0.7411) Bounds: xmin=0.3621, ymin=0.4754, xmax=0.5398, ymax=0.7746
+
+Frame count: 777 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4510, 0.7411) Bounds: xmin=0.3621, ymin=0.4754, xmax=0.5398, ymax=0.7746
+
+Frame count: 778 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4510, 0.7411) Bounds: xmin=0.3621, ymin=0.4754, xmax=0.5398, ymax=0.7746
+
+Frame count: 779 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4510, 0.7411) Bounds: xmin=0.3621, ymin=0.4754, xmax=0.5398, ymax=0.7746
+
+Frame count: 780 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4492, 0.7634) Bounds: xmin=0.3627, ymin=0.4694, xmax=0.5357, ymax=0.8049
+
+Frame count: 781 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.43 Detection count: 1 Position: center=(0.4495, 0.7638) Bounds: xmin=0.3627, ymin=0.4613, xmax=0.5363, ymax=0.8134
+
+Frame count: 782 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.4503, 0.7603) Bounds: xmin=0.3667, ymin=0.4548, xmax=0.5340, ymax=0.8161
+
+Frame count: 783 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.70 Detection count: 1 Position: center=(0.4524, 0.7545) Bounds: xmin=0.3744, ymin=0.4514, xmax=0.5304, ymax=0.8132
+
+Frame count: 784 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4528, 0.7417) Bounds: xmin=0.3750, ymin=0.4443, xmax=0.5306, ymax=0.8063
+
+Frame count: 785 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.67 Detection count: 1 Position: center=(0.4488, 0.7393) Bounds: xmin=0.3665, ymin=0.4425, xmax=0.5311, ymax=0.8054
+
+Frame count: 786 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.72 Detection count: 1 Position: center=(0.4468, 0.7153) Bounds: xmin=0.3637, ymin=0.4340, xmax=0.5299, ymax=0.7878
+
+Frame count: 787 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.55 Detection count: 1 Position: center=(0.4462, 0.7030) Bounds: xmin=0.3628, ymin=0.4306, xmax=0.5296, ymax=0.7777
+
+Frame count: 788 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.49 Detection count: 1 Position: center=(0.4454, 0.6752) Bounds: xmin=0.3626, ymin=0.4262, xmax=0.5282, ymax=0.7517
+
+Frame count: 789 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.50 Detection count: 1 Position: center=(0.4441, 0.6643) Bounds: xmin=0.3598, ymin=0.4253, xmax=0.5284, ymax=0.7407
+
+Frame count: 790 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4411, 0.6572) Bounds: xmin=0.3541, ymin=0.4224, xmax=0.5280, ymax=0.7359
+
+Frame count: 791 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.4351, 0.6543) Bounds: xmin=0.3429, ymin=0.4189, xmax=0.5273, ymax=0.7362
+
+Frame count: 792 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.54 Detection count: 1 Position: center=(0.4351, 0.6543) Bounds: xmin=0.3429, ymin=0.4189, xmax=0.5273, ymax=0.7362
+
+Frame count: 793 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.70 Detection count: 1 Position: center=(0.4354, 0.6787) Bounds: xmin=0.3478, ymin=0.4096, xmax=0.5230, ymax=0.7721
+
+Frame count: 794 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.68 Detection count: 1 Position: center=(0.4395, 0.6881) Bounds: xmin=0.3593, ymin=0.4106, xmax=0.5198, ymax=0.7815
+
+Frame count: 795 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4420, 0.6966) Bounds: xmin=0.3665, ymin=0.4200, xmax=0.5176, ymax=0.7813
+
+Frame count: 796 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.4418, 0.6987) Bounds: xmin=0.3667, ymin=0.4242, xmax=0.5170, ymax=0.7794
+
+Frame count: 797 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4423, 0.6995) Bounds: xmin=0.3682, ymin=0.4217, xmax=0.5164, ymax=0.7828
+
+Frame count: 798 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.76 Detection count: 1 Position: center=(0.4417, 0.6993) Bounds: xmin=0.3681, ymin=0.4170, xmax=0.5152, ymax=0.7873
+
+Frame count: 799 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4396, 0.6939) Bounds: xmin=0.3671, ymin=0.4145, xmax=0.5120, ymax=0.7839
+
+Frame count: 800 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.4358, 0.6934) Bounds: xmin=0.3608, ymin=0.4155, xmax=0.5109, ymax=0.7822
+
+Frame count: 801 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.57 Detection count: 1 Position: center=(0.4264, 0.6891) Bounds: xmin=0.3413, ymin=0.4165, xmax=0.5115, ymax=0.7766
+
+Frame count: 802 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4223, 0.6889) Bounds: xmin=0.3363, ymin=0.4183, xmax=0.5083, ymax=0.7746
+
+Frame count: 803 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.53 Detection count: 1 Position: center=(0.4185, 0.6748) Bounds: xmin=0.3298, ymin=0.4184, xmax=0.5072, ymax=0.7591
+
+Frame count: 804 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.68 Detection count: 1 Position: center=(0.4208, 0.6588) Bounds: xmin=0.3389, ymin=0.4146, xmax=0.5027, ymax=0.7454
+
+Frame count: 805 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.75 Detection count: 1 Position: center=(0.4242, 0.6434) Bounds: xmin=0.3490, ymin=0.4088, xmax=0.4993, ymax=0.7344
+
+Frame count: 806 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.83 Detection count: 1 Position: center=(0.4250, 0.6428) Bounds: xmin=0.3504, ymin=0.4074, xmax=0.4997, ymax=0.7351
+
+Frame count: 807 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.73 Detection count: 1 Position: center=(0.4209, 0.6522) Bounds: xmin=0.3429, ymin=0.4062, xmax=0.4990, ymax=0.7466
+
+Frame count: 808 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.76 Detection count: 1 Position: center=(0.4195, 0.6559) Bounds: xmin=0.3404, ymin=0.4084, xmax=0.4986, ymax=0.7484
+
+Frame count: 809 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.76 Detection count: 1 Position: center=(0.4186, 0.6538) Bounds: xmin=0.3398, ymin=0.4101, xmax=0.4973, ymax=0.7445
+
+Frame count: 810 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.4170, 0.6531) Bounds: xmin=0.3391, ymin=0.4106, xmax=0.4948, ymax=0.7432
+
+Frame count: 811 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.84 Detection count: 1 Position: center=(0.4149, 0.6492) Bounds: xmin=0.3365, ymin=0.4090, xmax=0.4933, ymax=0.7405
+
+Frame count: 812 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.83 Detection count: 1 Position: center=(0.4136, 0.6478) Bounds: xmin=0.3333, ymin=0.4084, xmax=0.4939, ymax=0.7396
+
+Frame count: 813 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4127, 0.6440) Bounds: xmin=0.3312, ymin=0.4064, xmax=0.4941, ymax=0.7374
+
+Frame count: 814 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.77 Detection count: 1 Position: center=(0.4121, 0.6475) Bounds: xmin=0.3313, ymin=0.4092, xmax=0.4930, ymax=0.7384
+
+Frame count: 815 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4124, 0.6495) Bounds: xmin=0.3334, ymin=0.4123, xmax=0.4914, ymax=0.7376
+
+Frame count: 816 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.82 Detection count: 1 Position: center=(0.4119, 0.6494) Bounds: xmin=0.3327, ymin=0.4133, xmax=0.4912, ymax=0.7364
+
+Frame count: 817 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.80 Detection count: 1 Position: center=(0.4114, 0.6441) Bounds: xmin=0.3316, ymin=0.4142, xmax=0.4912, ymax=0.7297
+
+Frame count: 818 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.83 Detection count: 1 Position: center=(0.4107, 0.6357) Bounds: xmin=0.3321, ymin=0.4127, xmax=0.4894, ymax=0.7220
+
+Frame count: 819 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.59 Detection count: 1 Position: center=(0.4100, 0.6314) Bounds: xmin=0.3291, ymin=0.4117, xmax=0.4910, ymax=0.7184
+
+Frame count: 820 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.72 Detection count: 1 Position: center=(0.4092, 0.6077) Bounds: xmin=0.3290, ymin=0.4075, xmax=0.4894, ymax=0.6967
+
+Frame count: 821 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.81 Detection count: 1 Position: center=(0.4082, 0.5936) Bounds: xmin=0.3281, ymin=0.4068, xmax=0.4883, ymax=0.6819
+
+Frame count: 822 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.78 Detection count: 1 Position: center=(0.4060, 0.5756) Bounds: xmin=0.3250, ymin=0.3969, xmax=0.4869, ymax=0.6722
+
+Frame count: 823 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.71 Detection count: 1 Position: center=(0.4046, 0.5583) Bounds: xmin=0.3207, ymin=0.3948, xmax=0.4885, ymax=0.6553
+
+Frame count: 824 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.66 Detection count: 1 Position: center=(0.4038, 0.5317) Bounds: xmin=0.3197, ymin=0.3773, xmax=0.4879, ymax=0.6438
+
+Frame count: 825 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.4042, 0.5216) Bounds: xmin=0.3210, ymin=0.3698, xmax=0.4874, ymax=0.6402
+
+Frame count: 826 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.4042, 0.5216) Bounds: xmin=0.3210, ymin=0.3698, xmax=0.4874, ymax=0.6402
+
+Frame count: 827 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.4042, 0.5216) Bounds: xmin=0.3210, ymin=0.3698, xmax=0.4874, ymax=0.6402
+
+Frame count: 828 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.4042, 0.5216) Bounds: xmin=0.3210, ymin=0.3698, xmax=0.4874, ymax=0.6402
+
+Frame count: 829 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.4042, 0.5216) Bounds: xmin=0.3210, ymin=0.3698, xmax=0.4874, ymax=0.6402
+
+Frame count: 830 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.63 Detection count: 1 Position: center=(0.4042, 0.5216) Bounds: xmin=0.3210, ymin=0.3698, xmax=0.4874, ymax=0.6402
+
+Frame count: 831 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 832 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 833 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 834 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 835 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 836 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 837 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 838 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 839 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 840 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 841 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 842 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 843 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 844 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 845 Width: 1280 Heigth: 720
+Label: Madsen ID: 5 Confidence: 0.58 Detection count: 1 Position: center=(0.3890, 0.4759) Bounds: xmin=0.2976, ymin=0.3890, xmax=0.4803, ymax=0.5711
+
+Frame count: 846 Width: 1280 Heigth: 720
+
+Frame count: 847 Width: 1280 Heigth: 720
+
+Frame count: 848 Width: 1280 Heigth: 720
+
+Frame count: 849 Width: 1280 Heigth: 720
+
+Frame count: 850 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.47 Detection count: 1 Position: center=(0.3631, 0.4445) Bounds: xmin=0.2751, ymin=0.3295, xmax=0.4510, ymax=0.5963
+Label: Madsen ID: 7 Confidence: 0.76 Detection count: 2 Position: center=(0.3653, 0.4514) Bounds: xmin=0.2804, ymin=0.3413, xmax=0.4501, ymax=0.5921
+
+Frame count: 851 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3647, 0.4316) Bounds: xmin=0.2782, ymin=0.3195, xmax=0.4511, ymax=0.5922
+
+Frame count: 852 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3647, 0.4316) Bounds: xmin=0.2782, ymin=0.3195, xmax=0.4511, ymax=0.5922
+
+Frame count: 853 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.50 Detection count: 1 Position: center=(0.3643, 0.4248) Bounds: xmin=0.2775, ymin=0.3051, xmax=0.4512, ymax=0.5991
+
+Frame count: 854 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.63 Detection count: 1 Position: center=(0.3653, 0.4215) Bounds: xmin=0.2793, ymin=0.3018, xmax=0.4514, ymax=0.5989
+
+Frame count: 855 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.77 Detection count: 1 Position: center=(0.3644, 0.4142) Bounds: xmin=0.2771, ymin=0.2987, xmax=0.4517, ymax=0.5939
+
+Frame count: 856 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.77 Detection count: 1 Position: center=(0.3633, 0.4068) Bounds: xmin=0.2759, ymin=0.2959, xmax=0.4507, ymax=0.5886
+
+Frame count: 857 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.71 Detection count: 1 Position: center=(0.3624, 0.4054) Bounds: xmin=0.2745, ymin=0.2924, xmax=0.4504, ymax=0.5907
+
+Frame count: 858 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.73 Detection count: 1 Position: center=(0.3632, 0.4048) Bounds: xmin=0.2771, ymin=0.2902, xmax=0.4493, ymax=0.5922
+
+Frame count: 859 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.74 Detection count: 1 Position: center=(0.3627, 0.4005) Bounds: xmin=0.2765, ymin=0.2890, xmax=0.4488, ymax=0.5887
+
+Frame count: 860 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3622, 0.4129) Bounds: xmin=0.2752, ymin=0.2894, xmax=0.4493, ymax=0.6018
+
+Frame count: 861 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3619, 0.4239) Bounds: xmin=0.2749, ymin=0.2927, xmax=0.4489, ymax=0.6106
+
+Frame count: 862 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.65 Detection count: 1 Position: center=(0.3618, 0.4334) Bounds: xmin=0.2748, ymin=0.2962, xmax=0.4488, ymax=0.6174
+
+Frame count: 863 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3609, 0.4429) Bounds: xmin=0.2723, ymin=0.3049, xmax=0.4495, ymax=0.6192
+
+Frame count: 864 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.51 Detection count: 1 Position: center=(0.3592, 0.4589) Bounds: xmin=0.2683, ymin=0.3220, xmax=0.4502, ymax=0.6195
+Label: Madsen ID: 7 Confidence: 0.71 Detection count: 2 Position: center=(0.3599, 0.4531) Bounds: xmin=0.2706, ymin=0.3163, xmax=0.4492, ymax=0.6189
+
+Frame count: 865 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.75 Detection count: 1 Position: center=(0.3592, 0.4840) Bounds: xmin=0.2696, ymin=0.3390, xmax=0.4488, ymax=0.6300
+Label: Madsen ID: 7 Confidence: 0.85 Detection count: 2 Position: center=(0.3598, 0.4718) Bounds: xmin=0.2713, ymin=0.3315, xmax=0.4483, ymax=0.6241
+
+Frame count: 866 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.69 Detection count: 1 Position: center=(0.3595, 0.5041) Bounds: xmin=0.2717, ymin=0.3467, xmax=0.4473, ymax=0.6443
+Label: Madsen ID: 7 Confidence: 0.85 Detection count: 2 Position: center=(0.3602, 0.4928) Bounds: xmin=0.2724, ymin=0.3421, xmax=0.4479, ymax=0.6365
+
+Frame count: 867 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.72 Detection count: 1 Position: center=(0.3627, 0.5114) Bounds: xmin=0.2775, ymin=0.3512, xmax=0.4479, ymax=0.6477
+
+Frame count: 868 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.71 Detection count: 1 Position: center=(0.3636, 0.5212) Bounds: xmin=0.2786, ymin=0.3534, xmax=0.4487, ymax=0.6562
+
+Frame count: 869 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.44 Detection count: 1 Position: center=(0.3611, 0.5170) Bounds: xmin=0.2733, ymin=0.3457, xmax=0.4489, ymax=0.6593
+Label: Madsen ID: 7 Confidence: 0.79 Detection count: 2 Position: center=(0.3623, 0.5229) Bounds: xmin=0.2756, ymin=0.3489, xmax=0.4490, ymax=0.6626
+
+Frame count: 870 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3618, 0.5190) Bounds: xmin=0.2735, ymin=0.3378, xmax=0.4501, ymax=0.6694
+
+Frame count: 871 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.64 Detection count: 1 Position: center=(0.3641, 0.5293) Bounds: xmin=0.2775, ymin=0.3472, xmax=0.4508, ymax=0.6713
+
+Frame count: 872 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.45 Detection count: 1 Position: center=(0.3686, 0.5338) Bounds: xmin=0.2869, ymin=0.3441, xmax=0.4503, ymax=0.6793
+Label: Madsen ID: 7 Confidence: 0.82 Detection count: 2 Position: center=(0.3682, 0.5393) Bounds: xmin=0.2845, ymin=0.3557, xmax=0.4519, ymax=0.6737
+
+Frame count: 873 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.84 Detection count: 1 Position: center=(0.3707, 0.5450) Bounds: xmin=0.2884, ymin=0.3585, xmax=0.4529, ymax=0.6771
+
+Frame count: 874 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.46 Detection count: 1 Position: center=(0.3724, 0.5455) Bounds: xmin=0.2916, ymin=0.3492, xmax=0.4533, ymax=0.6870
+Label: Madsen ID: 7 Confidence: 0.82 Detection count: 2 Position: center=(0.3726, 0.5480) Bounds: xmin=0.2915, ymin=0.3586, xmax=0.4538, ymax=0.6803
+
+Frame count: 875 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.70 Detection count: 1 Position: center=(0.3752, 0.5533) Bounds: xmin=0.2956, ymin=0.3498, xmax=0.4549, ymax=0.6949
+Label: Madsen ID: 7 Confidence: 0.79 Detection count: 2 Position: center=(0.3747, 0.5562) Bounds: xmin=0.2962, ymin=0.3554, xmax=0.4531, ymax=0.6925
+
+Frame count: 876 Width: 1280 Heigth: 720
+Label: Sit Madsen ID: 0 Confidence: 0.59 Detection count: 1 Position: center=(0.3783, 0.5683) Bounds: xmin=0.3028, ymin=0.3508, xmax=0.4539, ymax=0.7102
+Label: Madsen ID: 7 Confidence: 0.77 Detection count: 2 Position: center=(0.3778, 0.5661) Bounds: xmin=0.3013, ymin=0.3547, xmax=0.4544, ymax=0.7040
+
+Frame count: 877 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.77 Detection count: 1 Position: center=(0.3806, 0.5743) Bounds: xmin=0.3068, ymin=0.3546, xmax=0.4544, ymax=0.7130
+
+Frame count: 878 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.69 Detection count: 1 Position: center=(0.3819, 0.5837) Bounds: xmin=0.3085, ymin=0.3561, xmax=0.4552, ymax=0.7219
+
+Frame count: 879 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.68 Detection count: 1 Position: center=(0.3827, 0.5921) Bounds: xmin=0.3096, ymin=0.3629, xmax=0.4558, ymax=0.7242
+
+Frame count: 880 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.58 Detection count: 1 Position: center=(0.3840, 0.5997) Bounds: xmin=0.3116, ymin=0.3658, xmax=0.4564, ymax=0.7297
+
+Frame count: 881 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.68 Detection count: 1 Position: center=(0.3863, 0.6005) Bounds: xmin=0.3132, ymin=0.3684, xmax=0.4595, ymax=0.7280
+
+Frame count: 882 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3890, 0.6006) Bounds: xmin=0.3152, ymin=0.3616, xmax=0.4628, ymax=0.7348
+
+Frame count: 883 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.70 Detection count: 1 Position: center=(0.3903, 0.6024) Bounds: xmin=0.3167, ymin=0.3620, xmax=0.4640, ymax=0.7364
+
+Frame count: 884 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3925, 0.6063) Bounds: xmin=0.3174, ymin=0.3656, xmax=0.4677, ymax=0.7370
+
+Frame count: 885 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.76 Detection count: 1 Position: center=(0.3945, 0.6083) Bounds: xmin=0.3161, ymin=0.3641, xmax=0.4729, ymax=0.7407
+
+Frame count: 886 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.63 Detection count: 1 Position: center=(0.3957, 0.6124) Bounds: xmin=0.3135, ymin=0.3601, xmax=0.4780, ymax=0.7492
+
+Frame count: 887 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 888 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 889 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 890 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 891 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 892 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 893 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 894 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3985, 0.6182) Bounds: xmin=0.3133, ymin=0.3590, xmax=0.4836, ymax=0.7566
+
+Frame count: 895 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3961, 0.6654) Bounds: xmin=0.3038, ymin=0.3774, xmax=0.4884, ymax=0.7898
+
+Frame count: 896 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.49 Detection count: 1 Position: center=(0.3963, 0.6678) Bounds: xmin=0.3042, ymin=0.3790, xmax=0.4884, ymax=0.7908
+
+Frame count: 897 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.61 Detection count: 1 Position: center=(0.3983, 0.6680) Bounds: xmin=0.3105, ymin=0.3859, xmax=0.4862, ymax=0.7842
+
+Frame count: 898 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3977, 0.6891) Bounds: xmin=0.3082, ymin=0.4156, xmax=0.4872, ymax=0.7775
+
+Frame count: 899 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.72 Detection count: 1 Position: center=(0.3985, 0.6925) Bounds: xmin=0.3125, ymin=0.4228, xmax=0.4845, ymax=0.7740
+
+Frame count: 900 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.69 Detection count: 1 Position: center=(0.3976, 0.6965) Bounds: xmin=0.3109, ymin=0.4274, xmax=0.4843, ymax=0.7738
+
+Frame count: 901 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.58 Detection count: 1 Position: center=(0.3966, 0.6993) Bounds: xmin=0.3081, ymin=0.4298, xmax=0.4850, ymax=0.7745
+
+Frame count: 902 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.58 Detection count: 1 Position: center=(0.3966, 0.6993) Bounds: xmin=0.3081, ymin=0.4298, xmax=0.4850, ymax=0.7745
+
+Frame count: 903 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3932, 0.7000) Bounds: xmin=0.3039, ymin=0.4319, xmax=0.4825, ymax=0.7731
+
+Frame count: 904 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.49 Detection count: 1 Position: center=(0.3891, 0.7084) Bounds: xmin=0.3003, ymin=0.4423, xmax=0.4779, ymax=0.7718
+
+Frame count: 905 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.49 Detection count: 1 Position: center=(0.3891, 0.7084) Bounds: xmin=0.3003, ymin=0.4423, xmax=0.4779, ymax=0.7718
+
+Frame count: 906 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.48 Detection count: 1 Position: center=(0.3825, 0.6820) Bounds: xmin=0.2965, ymin=0.4432, xmax=0.4686, ymax=0.7421
+
+Frame count: 907 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.57 Detection count: 1 Position: center=(0.3804, 0.6542) Bounds: xmin=0.2995, ymin=0.4337, xmax=0.4613, ymax=0.7213
+
+Frame count: 908 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.74 Detection count: 1 Position: center=(0.3799, 0.6768) Bounds: xmin=0.3010, ymin=0.4395, xmax=0.4588, ymax=0.7401
+
+Frame count: 909 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.83 Detection count: 1 Position: center=(0.3804, 0.6557) Bounds: xmin=0.3035, ymin=0.4395, xmax=0.4574, ymax=0.7171
+
+Frame count: 910 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.75 Detection count: 1 Position: center=(0.3810, 0.6501) Bounds: xmin=0.3054, ymin=0.4410, xmax=0.4566, ymax=0.7094
+
+Frame count: 911 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.75 Detection count: 1 Position: center=(0.3816, 0.6750) Bounds: xmin=0.3059, ymin=0.4366, xmax=0.4574, ymax=0.7411
+
+Frame count: 912 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.79 Detection count: 1 Position: center=(0.3811, 0.6603) Bounds: xmin=0.3065, ymin=0.4415, xmax=0.4558, ymax=0.7201
+
+Frame count: 913 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.69 Detection count: 1 Position: center=(0.3809, 0.6930) Bounds: xmin=0.3053, ymin=0.4377, xmax=0.4565, ymax=0.7597
+
+Frame count: 914 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.59 Detection count: 1 Position: center=(0.3811, 0.7028) Bounds: xmin=0.3061, ymin=0.4337, xmax=0.4561, ymax=0.7743
+
+Frame count: 915 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.46 Detection count: 1 Position: center=(0.3815, 0.7006) Bounds: xmin=0.3046, ymin=0.4269, xmax=0.4584, ymax=0.7787
+
+Frame count: 916 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3827, 0.6970) Bounds: xmin=0.3049, ymin=0.4109, xmax=0.4606, ymax=0.7909
+
+Frame count: 917 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.57 Detection count: 1 Position: center=(0.3828, 0.7157) Bounds: xmin=0.3040, ymin=0.4288, xmax=0.4615, ymax=0.7933
+
+Frame count: 918 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.65 Detection count: 1 Position: center=(0.3822, 0.7230) Bounds: xmin=0.3040, ymin=0.4375, xmax=0.4603, ymax=0.7927
+
+Frame count: 919 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.80 Detection count: 1 Position: center=(0.3828, 0.7399) Bounds: xmin=0.3059, ymin=0.4512, xmax=0.4596, ymax=0.7975
+
+Frame count: 920 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.69 Detection count: 1 Position: center=(0.3821, 0.7517) Bounds: xmin=0.3046, ymin=0.4547, xmax=0.4597, ymax=0.8068
+
+Frame count: 921 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.55 Detection count: 1 Position: center=(0.3814, 0.7522) Bounds: xmin=0.3028, ymin=0.4481, xmax=0.4600, ymax=0.8140
+
+Frame count: 922 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.55 Detection count: 1 Position: center=(0.3814, 0.7522) Bounds: xmin=0.3028, ymin=0.4481, xmax=0.4600, ymax=0.8140
+
+Frame count: 923 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.41 Detection count: 1 Position: center=(0.3816, 0.7654) Bounds: xmin=0.3036, ymin=0.4477, xmax=0.4596, ymax=0.8287
+
+Frame count: 924 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.55 Detection count: 1 Position: center=(0.3799, 0.7793) Bounds: xmin=0.3019, ymin=0.4548, xmax=0.4580, ymax=0.8369
+
+Frame count: 925 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.47 Detection count: 1 Position: center=(0.3820, 0.7801) Bounds: xmin=0.3042, ymin=0.4541, xmax=0.4597, ymax=0.8385
+
+Frame count: 926 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.67 Detection count: 1 Position: center=(0.3815, 0.7882) Bounds: xmin=0.3031, ymin=0.4639, xmax=0.4598, ymax=0.8375
+
+Frame count: 927 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.65 Detection count: 1 Position: center=(0.3814, 0.7945) Bounds: xmin=0.3039, ymin=0.4659, xmax=0.4589, ymax=0.8424
+
+Frame count: 928 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.65 Detection count: 1 Position: center=(0.3799, 0.7959) Bounds: xmin=0.3010, ymin=0.4677, xmax=0.4589, ymax=0.8422
+
+Frame count: 929 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.70 Detection count: 1 Position: center=(0.3776, 0.7989) Bounds: xmin=0.2970, ymin=0.4674, xmax=0.4582, ymax=0.8457
+
+Frame count: 930 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.63 Detection count: 1 Position: center=(0.3764, 0.8044) Bounds: xmin=0.2934, ymin=0.4709, xmax=0.4593, ymax=0.8482
+
+Frame count: 931 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3904, 0.8080) Bounds: xmin=0.2828, ymin=0.4719, xmax=0.4980, ymax=0.8511
+
+Frame count: 932 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3904, 0.8080) Bounds: xmin=0.2828, ymin=0.4719, xmax=0.4980, ymax=0.8511
+
+Frame count: 933 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3904, 0.8080) Bounds: xmin=0.2828, ymin=0.4719, xmax=0.4980, ymax=0.8511
+
+Frame count: 934 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3904, 0.8080) Bounds: xmin=0.2828, ymin=0.4719, xmax=0.4980, ymax=0.8511
+
+Frame count: 935 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.63 Detection count: 1 Position: center=(0.3682, 0.8641) Bounds: xmin=0.2804, ymin=0.5372, xmax=0.4559, ymax=0.8472
+
+Frame count: 936 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.52 Detection count: 1 Position: center=(0.3684, 0.8683) Bounds: xmin=0.2806, ymin=0.5444, xmax=0.4562, ymax=0.8445
+
+Frame count: 937 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.74 Detection count: 1 Position: center=(0.3730, 0.8683) Bounds: xmin=0.2833, ymin=0.5469, xmax=0.4627, ymax=0.8421
+
+Frame count: 938 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.71 Detection count: 1 Position: center=(0.3772, 0.8695) Bounds: xmin=0.2849, ymin=0.5448, xmax=0.4694, ymax=0.8454
+
+Frame count: 939 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.60 Detection count: 1 Position: center=(0.3821, 0.8711) Bounds: xmin=0.2873, ymin=0.5448, xmax=0.4768, ymax=0.8473
+
+Frame count: 940 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.47 Detection count: 1 Position: center=(0.3827, 0.8778) Bounds: xmin=0.2858, ymin=0.5475, xmax=0.4796, ymax=0.8518
+
+Frame count: 941 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.46 Detection count: 1 Position: center=(0.3848, 0.8958) Bounds: xmin=0.2847, ymin=0.5547, xmax=0.4848, ymax=0.8643
+
+Frame count: 942 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.46 Detection count: 1 Position: center=(0.3848, 0.8958) Bounds: xmin=0.2847, ymin=0.5547, xmax=0.4848, ymax=0.8643
+
+Frame count: 943 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.44 Detection count: 1 Position: center=(0.3827, 0.9138) Bounds: xmin=0.2842, ymin=0.5552, xmax=0.4813, ymax=0.8835
+
+Frame count: 944 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.50 Detection count: 1 Position: center=(0.3845, 0.9169) Bounds: xmin=0.2836, ymin=0.5547, xmax=0.4853, ymax=0.8874
+
+Frame count: 945 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 946 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 947 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 948 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 949 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 950 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 951 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 952 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.43 Detection count: 1 Position: center=(0.3837, 0.9206) Bounds: xmin=0.2836, ymin=0.5557, xmax=0.4839, ymax=0.8904
+
+Frame count: 953 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.50 Detection count: 1 Position: center=(0.3851, 0.9161) Bounds: xmin=0.2859, ymin=0.5428, xmax=0.4843, ymax=0.8984
+
+Frame count: 954 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.52 Detection count: 1 Position: center=(0.3857, 0.9134) Bounds: xmin=0.2857, ymin=0.5407, xmax=0.4858, ymax=0.8975
+
+Frame count: 955 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.61 Detection count: 1 Position: center=(0.3847, 0.9091) Bounds: xmin=0.2853, ymin=0.5391, xmax=0.4841, ymax=0.8945
+
+Frame count: 956 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.55 Detection count: 1 Position: center=(0.3839, 0.9012) Bounds: xmin=0.2844, ymin=0.5360, xmax=0.4835, ymax=0.8890
+
+Frame count: 957 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.55 Detection count: 1 Position: center=(0.3839, 0.9012) Bounds: xmin=0.2844, ymin=0.5360, xmax=0.4835, ymax=0.8890
+
+Frame count: 958 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.58 Detection count: 1 Position: center=(0.3823, 0.8964) Bounds: xmin=0.2853, ymin=0.5375, xmax=0.4793, ymax=0.8822
+
+Frame count: 959 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.63 Detection count: 1 Position: center=(0.3827, 0.9014) Bounds: xmin=0.2859, ymin=0.5497, xmax=0.4795, ymax=0.8755
+
+Frame count: 960 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.53 Detection count: 1 Position: center=(0.3825, 0.9101) Bounds: xmin=0.2842, ymin=0.5624, xmax=0.4807, ymax=0.8722
+
+Frame count: 961 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.53 Detection count: 1 Position: center=(0.3825, 0.9101) Bounds: xmin=0.2842, ymin=0.5624, xmax=0.4807, ymax=0.8722
+
+Frame count: 962 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3830, 0.9219) Bounds: xmin=0.2847, ymin=0.5829, xmax=0.4813, ymax=0.8647
+
+Frame count: 963 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3830, 0.9219) Bounds: xmin=0.2847, ymin=0.5829, xmax=0.4813, ymax=0.8647
+
+Frame count: 964 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3830, 0.9219) Bounds: xmin=0.2847, ymin=0.5829, xmax=0.4813, ymax=0.8647
+
+Frame count: 965 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3830, 0.9219) Bounds: xmin=0.2847, ymin=0.5829, xmax=0.4813, ymax=0.8647
+
+Frame count: 966 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.46 Detection count: 1 Position: center=(0.3858, 0.8245) Bounds: xmin=0.2897, ymin=0.4713, xmax=0.4819, ymax=0.8699
+
+Frame count: 967 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.46 Detection count: 1 Position: center=(0.3858, 0.8245) Bounds: xmin=0.2897, ymin=0.4713, xmax=0.4819, ymax=0.8699
+
+Frame count: 968 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.50 Detection count: 1 Position: center=(0.3824, 0.8696) Bounds: xmin=0.2846, ymin=0.5403, xmax=0.4801, ymax=0.8501
+
+Frame count: 969 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.50 Detection count: 1 Position: center=(0.3824, 0.8696) Bounds: xmin=0.2846, ymin=0.5403, xmax=0.4801, ymax=0.8501
+
+Frame count: 970 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3768, 0.8848) Bounds: xmin=0.2813, ymin=0.5643, xmax=0.4723, ymax=0.8427
+
+Frame count: 971 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3768, 0.8848) Bounds: xmin=0.2813, ymin=0.5643, xmax=0.4723, ymax=0.8427
+
+Frame count: 972 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3768, 0.8848) Bounds: xmin=0.2813, ymin=0.5643, xmax=0.4723, ymax=0.8427
+
+Frame count: 973 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3768, 0.8848) Bounds: xmin=0.2813, ymin=0.5643, xmax=0.4723, ymax=0.8427
+
+Frame count: 974 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.54 Detection count: 1 Position: center=(0.3768, 0.8848) Bounds: xmin=0.2813, ymin=0.5643, xmax=0.4723, ymax=0.8427
+
+Frame count: 975 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 976 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 977 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 978 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 979 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 980 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 981 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 982 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 983 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 984 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 985 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 986 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 987 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 988 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 989 Width: 1280 Heigth: 720
+Label: Madsen ID: 7 Confidence: 0.45 Detection count: 1 Position: center=(0.3921, 0.7786) Bounds: xmin=0.3033, ymin=0.4646, xmax=0.4810, ymax=0.8263
+
+Frame count: 990 Width: 1280 Heigth: 720
+
+Frame count: 991 Width: 1280 Heigth: 720
+
+Frame count: 992 Width: 1280 Heigth: 720
+
+Frame count: 993 Width: 1280 Heigth: 720
+
+Frame count: 994 Width: 1280 Heigth: 720
+
+Frame count: 995 Width: 1280 Heigth: 720
+
+Frame count: 996 Width: 1280 Heigth: 720
+
+Frame count: 997 Width: 1280 Heigth: 720
+
+Frame count: 998 Width: 1280 Heigth: 720
+
+Frame count: 999 Width: 1280 Heigth: 720
+
+Frame count: 1000 Width: 1280 Heigth: 720
+
+Frame count: 1001 Width: 1280 Heigth: 720
+
+Frame count: 1002 Width: 1280 Heigth: 720
+
+Frame count: 1003 Width: 1280 Heigth: 720
+
+Frame count: 1004 Width: 1280 Heigth: 720
+
+Frame count: 1005 Width: 1280 Heigth: 720
+
+Frame count: 1006 Width: 1280 Heigth: 720
+
+Frame count: 1007 Width: 1280 Heigth: 720
+
+Frame count: 1008 Width: 1280 Heigth: 720
+
+Frame count: 1009 Width: 1280 Heigth: 720
+
+Frame count: 1010 Width: 1280 Heigth: 720
+
+Frame count: 1011 Width: 1280 Heigth: 720
+
+Frame count: 1012 Width: 1280 Heigth: 720
+
+Frame count: 1013 Width: 1280 Heigth: 720
+
+Frame count: 1014 Width: 1280 Heigth: 720
+
+Frame count: 1015 Width: 1280 Heigth: 720
+
+Frame count: 1016 Width: 1280 Heigth: 720
+
+Frame count: 1017 Width: 1280 Heigth: 720
+
+Frame count: 1018 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1019 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1020 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1021 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1022 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1023 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1024 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1025 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1026 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1027 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1028 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1029 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1030 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1031 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1032 Width: 1280 Heigth: 720
+Label: Madsen ID: 8 Confidence: 0.58 Detection count: 1 Position: center=(0.4414, 0.6445) Bounds: xmin=0.3571, ymin=0.4854, xmax=0.5257, ymax=0.6590
+
+Frame count: 1033 Width: 1280 Heigth: 720
+
+Frame count: 1034 Width: 1280 Heigth: 720
+
+Frame count: 1035 Width: 1280 Heigth: 720
+
+Frame count: 1036 Width: 1280 Heigth: 720
+
+Frame count: 1037 Width: 1280 Heigth: 720
+
+Frame count: 1038 Width: 1280 Heigth: 720
+
+Frame count: 1039 Width: 1280 Heigth: 720
+
+Frame count: 1040 Width: 1280 Heigth: 720
+
+Frame count: 1041 Width: 1280 Heigth: 720
+
+Frame count: 1042 Width: 1280 Heigth: 720
+
+Frame count: 1043 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.40 Detection count: 1 Position: center=(0.4461, 0.6027) Bounds: xmin=0.3528, ymin=0.4002, xmax=0.5394, ymax=0.6985
+
+Frame count: 1044 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.54 Detection count: 1 Position: center=(0.4453, 0.6117) Bounds: xmin=0.3543, ymin=0.4132, xmax=0.5363, ymax=0.6954
+
+Frame count: 1045 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1046 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1047 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1048 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1049 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1050 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1051 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1052 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1053 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1054 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1055 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+Frame count: 1056 Width: 1280 Heigth: 720
+Label: Madsen ID: 9 Confidence: 0.53 Detection count: 1 Position: center=(0.4451, 0.6179) Bounds: xmin=0.3544, ymin=0.4150, xmax=0.5359, ymax=0.7002
+
+End-of-stream
+End-of-stream reached. Exiting...
+Shutting down... Hit Ctrl-C again to force quit.
+Exiting...

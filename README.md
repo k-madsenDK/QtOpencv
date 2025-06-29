@@ -1,39 +1,45 @@
-# QtOpencv
+# Simple Program for Saving Frames from MP4 Videos Using Hailo Detection
 
-Simple program that takes an MP4 file combined with a Hailo-generated text file and, if needed, saves frames from the video file as JPGs with the original frame.
+This program lets you watch an MP4 video, see detection results from a Hailo-generated text file, and save frames as JPG images if you need them. It’s designed to work with a Hailo+ hat on a Raspberry Pi.
 
-This is intended to be used with a Hailo+ hat on an RPi system.
+## How to Use
 
-- Spacebar: Start/stop showing the video file
-- Left arrow key: Go back 1 frame (slow)
-- Right arrow key: Move forward 1 frame
-- Ctrl+S: Save the current frame as filename+framenumber.jpg
+- Press the **spacebar** to start or stop the video.
+- Use the **left arrow key** to go back one frame (slow).
+- Use the **right arrow key** to go forward one frame.
+- Press **Ctrl+S** to save the current frame as `filename+framenumber.jpg`.
 
-You need to use `madsen.py` as the detection file instead of `detection.py`.  
-This script creates the text file:
+## Preparing Detection Files
 
-python3 basic_pipelines/madsen.py --hef-path resources/yolo11s.hef --input example.mp4 --labels-json resources/madsen.json >> example.txt
+- You need to use `madsen.py` to generate the detection text file, not `detection.py`.
+- To create this text file, run:
+  ```
+  python3 basic_pipelines/madsen.py --hef-path resources/yolo11s.hef --input example.mp4 >> example.txt
+  ```
+- There’s also `yolo_detect_madsen.py` for making a text file from a YOLO file (for testing a new compilation before making a new HEF compilation). You must have `ultralytics` installed. If you need help, ask Copilot for an installation guide.
+  ```
+  python3 yolo_detect_madsen.py --model=best.pt --source=test.mp4 >> test.txt
+  ```
+- Make sure the text file has the same name as the MP4 file, just with a different extension.
 
-The filename of the text file must be the same as the MP4 file, with only the extension different.
+## Tips
 
-Start QtOpencv in the directory where you want to save the pictures.
+- Start the QtOpencv program in the folder where you want your saved pictures.
+- Use this program to help improve your model: watch an MP4 of the objects in your model, and if the detection score is low or missing, save some frames and add them to your model’s pictures folder.
 
-I made this program to update my model.
-I go through an MP4 file of the object(s) in my model. If the score is low or not present, I save some pictures and put them in the pictures folder of the model.
+## Screenshots
 
 ![Screenshot](QtOpensvscreenshot.png)
 ![Screenshot](QtOpensvscreenshot1.png)
 
-In some cases, pictures taken with my cellphone are upside down.
-In these cases, the bounding box will not be in the right spot, but saving the picture is still in the correct orientation.
+## Notes
 
-madsenhave.txt is a txt file for explanation.
+- Sometimes, if you take pictures with your phone, they might be upside down. In these cases, the bounding box might be in the wrong place, but the saved picture will still be in the right orientation.
+- `madsenhave.txt` is a text file that explains more.
 
-to compile it
+## To Build
 
+Run:
+```
 cmake .
-
-make
-
-You have to have qt5 on your rpi and cmake working.
-ask copilot how to install it if needed.
+```

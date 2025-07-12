@@ -5,6 +5,7 @@
 #include <QSize>
 
 class VideoWidget;
+class CompareWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -20,12 +21,15 @@ protected:
 private:
     VideoWidget* videoWidget;
     bool videoplay = false;
+    CompareWidget *compareWidget = nullptr;
 
 private slots:
     void updateStatusBar(bool playing);
     void showFrameInfo(int frameNumber, QSize size);
     void showFrameSaved(const QString &filename);
     void saveFrame();
+    //void showCompareDialog();
+    void showCompareWindow();
 };
 
 #endif // MAINWINDOW_H

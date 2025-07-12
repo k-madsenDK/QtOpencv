@@ -1,6 +1,7 @@
 #include "videowidget.h"
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QSlider>
 #include <QImage>
 #include <QCloseEvent>
 #include <QFileInfo>
@@ -13,16 +14,27 @@ VideoWidget::VideoWidget(QWidget *parent)
     : QWidget(parent),
       timer(new QTimer(this)),
       label(new QLabel(this)),
+      frameSlider(new QSlider(Qt::Horizontal, this)),
       fps(30),
       playing(false),
-      currentFrameIdx(0)
+      currentFrameIdx(0),
+      totalFrames(0)
 {
     label->setAlignment(Qt::AlignCenter);
+
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(label);
+    layout->addWidget(frameSlider);
     setLayout(layout);
 
     connect(timer, &QTimer::timeout, this, &VideoWidget::timerNextFrame);
+
+    frameSlider->setMinimum(0);
+    frameSlider->setMaximum(0);
+    frameSlider->setValue(0);
+    frameSlider->setEnabled(false);
+
+    connect(frameSlider, &QSlider::valueChanged, this, &VideoWidget::setFrameFromSlider);
 }
 
 VideoWidget::~VideoWidget()
@@ -39,56 +51,57 @@ void VideoWidget::setVideo(const QString &filePath)
 
     cap.open(filePath.toStdString());
     loadedFile = filePath;
-    annotationFrameSize = QSize();
-
-    // Load annotation file with same base name but .txt extension
-    QFileInfo fi(filePath);
-    QString annotationFile = fi.path() + "/" + fi.completeBaseName() + ".txt";
-    annotationParser.loadFromFile(annotationFile);
 
     if (!cap.isOpened()) {
-        label->setText("Cannot open video file!");
-        playing = false;
-        emit playStateChanged(false);
+        label->setText("Failed to open video.");
+        frameSlider->setEnabled(false);
         return;
     }
 
     fps = static_cast<int>(cap.get(cv::CAP_PROP_FPS));
-    if (fps <= 0) fps = 30;
+    totalFrames = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_COUNT));
+
+    setSliderRange();
+
     currentFrameIdx = 0;
-    cap.set(cv::CAP_PROP_POS_FRAMES, 0);
-    nextFrame();
-    play();
+    frameSlider->setValue(0);
+
+    cv::Mat frame;
+    if (cap.read(frame) && !frame.empty()) {
+        currentFrameOrig = frame.clone();
+        showFrame(frame, currentFrameIdx);
+        frameSlider->setEnabled(true);
+    } else {
+        label->setText("Failed to read first frame.");
+        frameSlider->setEnabled(false);
+    }
 }
 
-void VideoWidget::play()
+void VideoWidget::setSliderRange()
 {
-    if (!cap.isOpened() || playing)
+    frameSlider->setMinimum(0);
+    frameSlider->setMaximum(totalFrames > 0 ? totalFrames - 1 : 0);
+}
+
+void VideoWidget::setFrameFromSlider(int frameNumber)
+{
+    if (!cap.isOpened())
         return;
 
-    playing = true;
-    timer->start(1000 / fps);
-    emit playStateChanged(true);
-}
+    if (playing) pause();
 
-void VideoWidget::pause()
-{
-    if (!playing)
+    if (frameNumber == currentFrameIdx)
         return;
 
-    playing = false;
-    timer->stop();
-    emit playStateChanged(false);
-}
-
-bool VideoWidget::isPlaying() const
-{
-    return playing;
-}
-
-void VideoWidget::timerNextFrame()
-{
-    nextFrame();
+    cap.set(cv::CAP_PROP_POS_FRAMES, frameNumber);
+    cv::Mat frame;
+    if (!cap.read(frame) || frame.empty()) {
+        label->setText("Failed to read frame.");
+        return;
+    }
+    currentFrameIdx = frameNumber;
+    currentFrameOrig = frame.clone();
+    showFrame(frame, currentFrameIdx);
 }
 
 void VideoWidget::nextFrame()
@@ -96,18 +109,21 @@ void VideoWidget::nextFrame()
     if (!cap.isOpened())
         return;
 
+    //if (playing) pause();
+
+    int goTo = currentFrameIdx + 1;
+    if (goTo >= totalFrames)
+        goTo = totalFrames - 1;
+    cap.set(cv::CAP_PROP_POS_FRAMES, goTo);
     cv::Mat frame;
-    if (cap.get(cv::CAP_PROP_POS_FRAMES) != 0)
-        currentFrameIdx = static_cast<int>(cap.get(cv::CAP_PROP_POS_FRAMES));
     if (!cap.read(frame) || frame.empty()) {
-        label->setText("End of video or failed to read frame.");
-        playing = false;
-        emit playStateChanged(false);
+        label->setText("Failed to read frame.");
         return;
     }
-    currentFrameIdx = static_cast<int>(cap.get(cv::CAP_PROP_POS_FRAMES)) - 1;
+    currentFrameIdx = goTo;
     currentFrameOrig = frame.clone();
     showFrame(frame, currentFrameIdx);
+    updateSlider();
 }
 
 void VideoWidget::prevFrame()
@@ -129,59 +145,14 @@ void VideoWidget::prevFrame()
     currentFrameIdx = goTo;
     currentFrameOrig = frame.clone();
     showFrame(frame, currentFrameIdx);
+    updateSlider();
 }
 
-void VideoWidget::showFrame(const cv::Mat& frame, int frameIdx)
+void VideoWidget::updateSlider()
 {
-    cv::Mat displayFrame = frame.clone();
-    QSize frameSize = QSize(frame.cols, frame.rows);
-
-    // Draw annotation overlays (if any)
-    const FrameAnnotations* ann = annotationParser.getAnnotations(frameIdx);
-    if (ann) {
-        frameSize = ann->size; // Use annotation size for display
-        for (const FrameLabel& fl : ann->labels) {
-            int w = ann->size.width();
-            int h = ann->size.height();
-            /*int x1 = int(fl.xmin * w);
-            int y1 = int(fl.ymin * h);
-            int x2 = int(fl.xmax * w);
-            int y2 = int(fl.ymax * h);*/
-            int x_min = static_cast<int>(fl.xmin * frame.cols);
-            int y_min = static_cast<int>(fl.ymin * frame.rows);
-            int x_max = static_cast<int>(fl.xmax * frame.cols);
-            int y_max = static_cast<int>(fl.ymax * frame.rows);
-            // Draw rectangle
-            cv::rectangle(displayFrame, cv::Point(x_min, y_min), cv::Point(x_max, y_max), cv::Scalar(255,255,255), 2);
-            // Draw label + confidence above box
-            std::stringstream stream;
-            stream << std::fixed << std::setprecision(2) << fl.confidence;
-            std::string conf = stream.str();
-            std::string labelText = fl.label.toStdString() + " " + conf;//.arg(fl.confidence);
-            int baseLine = 0;
-            cv::Size textSize = cv::getTextSize(labelText, cv::FONT_HERSHEY_SIMPLEX, 1, 1, &baseLine);
-            int textY = std::max(y_min - 10, textSize.height + 2);
-            cv::putText(displayFrame, labelText, cv::Point(x_min, textY),
-                        cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255,255,255), 2);
-        }
-        annotationFrameSize = ann->size;
-    } else {
-        annotationFrameSize = QSize(frame.cols, frame.rows);
-    }
-
-    // Convert to QImage and display at annotation size!
-    cv::Mat rgb;
-    cv::cvtColor(displayFrame, rgb, cv::COLOR_BGR2RGB);
-
-    QImage img(rgb.data, rgb.cols, rgb.rows, rgb.step, QImage::Format_RGB888);
-
-    // Scale to annotation size, not widget size
-    QPixmap pixmap = QPixmap::fromImage(img).scaled(annotationFrameSize,
-        Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    label->setPixmap(pixmap);
-
-    emit frameInfoChanged(frameIdx, annotationFrameSize);
+    frameSlider->blockSignals(true);
+    frameSlider->setValue(currentFrameIdx);
+    frameSlider->blockSignals(false);
 }
 
 void VideoWidget::saveCurrentFrame()
@@ -200,16 +171,23 @@ void VideoWidget::saveCurrentFrame()
     emit frameSaved(outFile);
 }
 
+void VideoWidget::timerNextFrame()
+{
+    nextFrame();
+}
+
+void VideoWidget::resizeEvent(QResizeEvent *event)
+{
+    // Re-display to update scaling
+    if (!currentFrameOrig.empty())
+        showFrame(currentFrameOrig, currentFrameIdx);
+    QWidget::resizeEvent(event);
+}
+
 void VideoWidget::closeEvent(QCloseEvent *event)
 {
     timer->stop();
     if (cap.isOpened())
         cap.release();
-    QWidget::closeEvent(event);
-}
-
-void VideoWidget::resizeEvent(QResizeEvent *) {
-    // re-display to update scaling
-    if (!currentFrameOrig.empty())
-        showFrame(currentFrameOrig, currentFrameIdx);
+    QWidget::closeEvent(event); // call base class event handler
 }

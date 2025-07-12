@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QSlider>
 #include <opencv2/opencv.hpp>
 #include "annotationparser.h"
 
@@ -25,6 +26,7 @@ public slots:
     void nextFrame();
     void prevFrame();
     void saveCurrentFrame();
+    void setFrameFromSlider(int frameNumber);
 
 signals:
     void playStateChanged(bool playing);
@@ -44,14 +46,18 @@ private:
     cv::VideoCapture cap;
     QTimer *timer;
     QLabel *label;
+    QSlider *frameSlider;
     int fps;
     bool playing;
     int currentFrameIdx;
+    int totalFrames;
     cv::Mat currentFrameOrig;
     QString loadedFile;
 
     AnnotationParser annotationParser;
     QSize annotationFrameSize;
+    void updateSlider();
+    void setSliderRange();
 };
 
 #endif // VIDEOWIDGET_H

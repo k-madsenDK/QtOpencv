@@ -8,7 +8,8 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
 - Use the **left arrow key** to go back one frame (slow).
 - Use the **right arrow key** to go forward one frame.
 - Press **Ctrl+S** to save the current frame as `filename+framenumber.jpg`.
-
+- The bottom slider makes it easy to go forward and backward to the file (added 12-07-25)
+  
 ## Preparing Detection Files
 
 - You need to use `madsen.py` to generate the detection text file, not `detection.py`.

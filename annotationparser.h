@@ -30,9 +30,10 @@ public:
 
     // Returns annotation for frameNumber, or nullptr if not found
     const FrameAnnotations* getAnnotations(int frameNumber) const;
+    QMap<int, FrameAnnotations> frameMap;
 
 private:
-    QMap<int, FrameAnnotations> frameMap;
+
 };
 
 #endif // ANNOTATIONPARSER_H

@@ -50,7 +50,7 @@ bool AnnotationParser::loadFromFile(const QString& fileName)
             }
         }
         // Drop lines not matching the above
-    }
+    }//end while
     // Store the last frame
     if (currentFrame.frameNumber >= 0)
         frameMap[currentFrame.frameNumber] = currentFrame;

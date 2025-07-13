@@ -52,6 +52,16 @@ void VideoWidget::setVideo(const QString &filePath)
     cap.open(filePath.toStdString());
     loadedFile = filePath;
 
+    // Load annotation file (assume .txt extension)
+    QString annotFile = filePath;
+    annotFile.chop(4); // Remove ".mp4"
+    annotFile += ".txt";
+    bool annLoaded = annotationParser.loadFromFile(annotFile);
+   /* if (!annLoaded) {
+        qDebug() << "Annotation file not loaded:" << annotFile;
+        // Optionally show a message or fallback behavior
+    }*/
+
     if (!cap.isOpened()) {
         label->setText("Failed to open video.");
         frameSlider->setEnabled(false);

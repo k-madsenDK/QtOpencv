@@ -23,13 +23,11 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
   python3 yolo_detect_madsen.py --model=best.pt --source=test.mp4 >> test.txt
   ```
 - Make sure the text file has the same name as the MP4 file, just with a different extension.
-  ```
 - CompareWidge is designet to compare the textoutput from to diferent hef builds
   ```
 - python3 basic_pipelines/madsen.py --hef-path resources/build1.hef --input example.mp4 >> build1.txt
   ```
 - python3 basic_pipelines/madsen.py --hef-path resources/build2.hef --input example.mp4 >> build2.txt
-  ```
 - use comparewidget to see the difference on the hef model builds on the same video
   
 ## Tips

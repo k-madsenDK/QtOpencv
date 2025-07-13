@@ -9,6 +9,7 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
 - Use the **right arrow key** to go forward one frame.
 - Press **Ctrl+S** to save the current frame as `filename+framenumber.jpg`.
 - The bottom slider makes it easy to go forward and backward to the file (added 12-07-25)
+- **CompareWidget**: CompareWidget allows you to open a dedicated comparison window for side-by-side or table-based frame comparison. Launch it from the main window to compare multiple frames or images interactively.
   
 ## Preparing Detection Files
 
@@ -22,7 +23,11 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
   python3 yolo_detect_madsen.py --model=best.pt --source=test.mp4 >> test.txt
   ```
 - Make sure the text file has the same name as the MP4 file, just with a different extension.
-
+- CompareWidge is designet to compare the textoutput from to diferent hef builds
+- python3 basic_pipelines/madsen.py --hef-path resources/build1.hef --input example.mp4 >> build1.txt
+- python3 basic_pipelines/madsen.py --hef-path resources/build2.hef --input example.mp4 >> build2.txt
+- use comparewidget to see the difference on the hef model builds on the same video
+  
 ## Tips
 
 - Start the QtOpencv program in the folder where you want your saved pictures.

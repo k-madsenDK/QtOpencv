@@ -19,8 +19,10 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
   python3 basic_pipelines/madsen.py --hef-path resources/yolo11s.hef --input example.mp4 >> example.txt
   
 - There’s also `yolo_detect_madsen.py` for making a text file from a YOLO file (for testing a new compilation before making a new HEF compilation). You must have `ultralytics` installed. If you need help, ask Copilot for an installation guide.
- 
-- python3 yolo_detect_madsen.py --model=best.pt --source=test.mp4 >> test.txt
+- python3 yolo_detect_madsen.py --model=best.pt --source=test.mp4 >>test.txt
+
+- the `yolo_onnx_detect_madsen.py` is equ `yolo_detect_madsen.py` but it is for testing difference between model.pt and the exported model.onnx
+- python3 yolo_onnx_detect_madsen.py --model=best.pt --source=test.mp4 >>onnxtest.txt
  
 - Make sure the text file has the same name as the MP4 file, just with a different extension.
 - CompareWidge is designet to compare the textoutput from to diferent hef builds

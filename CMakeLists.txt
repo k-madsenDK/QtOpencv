@@ -17,12 +17,14 @@ set(SOURCES
     mainwindow.cpp
     videowidget.cpp
     annotationparser.cpp
+    comparewidget.cpp
 )
 
 set(HEADERS
     mainwindow.h
     videowidget.h
     annotationparser.h
+    comparewidget.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

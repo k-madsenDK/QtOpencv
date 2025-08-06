@@ -39,7 +39,7 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
 ![Screenshot](QtOpensvscreenshot1.png)
 
 ## Notes
-
+- The best result using phone cammera is 9:16 ratio.
 - Sometimes, if you take pictures with your phone, they might be upside down. In these cases, the bounding box might be in the wrong place, but the saved picture will still be in the right orientation.
 - `madsenhave.txt` is a text file that explains more.
 - UPS comparewidget was missing in CmakeList.txt sry.

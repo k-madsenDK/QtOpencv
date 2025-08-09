@@ -43,7 +43,8 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
 - Sometimes, if you take pictures with your phone, they might be upside down. In these cases, the bounding box might be in the wrong place, but the saved picture will still be in the right orientation.
 - `madsenhave.txt` is a text file that explains more.
 - UPS comparewidget was missing in CmakeList.txt sry.
-- this is only working until relaese  april-2025 sry:-(  
+- this is only working until relaese  april-2025 sry:-(
+- madsen2.py will work with the new release but you have to change the directory path to the new one end some recources is not there any more.    
 ## To Build
 
 Run:

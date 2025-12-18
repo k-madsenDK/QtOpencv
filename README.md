@@ -44,6 +44,21 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
 - `madsenhave.txt` is a text file that explains more.
 - UPS comparewidget was missing in CmakeList.txt sry.
    
+## Arduino Pico Support
+
+This repository includes an Arduino sketch for the Raspberry Pi Pico (Earl Philhower core) that demonstrates timing measurements for `digitalRead()` operations.
+
+**File**: `pico_digitalRead_timing.ino`
+
+For detailed information about hardware setup, installation, and usage, see [ARDUINO_PICO_README.md](ARDUINO_PICO_README.md).
+
+### Quick Start
+1. Install the Earl Philhower Arduino-Pico core
+2. Upload `pico_digitalRead_timing.ino` to your Raspberry Pi Pico
+3. Open Serial Monitor at 115200 baud to view timing results
+
+This is useful for developers integrating hardware sensors with video processing systems or prototyping embedded vision applications.
+
 ## To Build
 
 Run:

@@ -171,6 +171,13 @@ void VideoWidget::showFrame(const cv::Mat& frame, int frameIdx)
             int textY = std::max(y_min - 10, textSize.height + 2);
             cv::putText(displayFrame, labelText, cv::Point(x_min, textY),
                         cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255,255,255), 2);
+            
+            // Draw center point marker
+            int centerX_px = static_cast<int>(fl.centerX * frame.cols);
+            int centerY_px = static_cast<int>(fl.centerY * frame.rows);
+            cv::Point centerPoint(centerX_px, centerY_px);
+            cv::circle(displayFrame, centerPoint, 5, cv::Scalar(0, 255, 0), -1);
+            cv::circle(displayFrame, centerPoint, 6, cv::Scalar(255, 255, 255), 1);
         }
         annotationFrameSize = ann->size;
     } else {

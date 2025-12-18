@@ -1,0 +1,27 @@
+# Build artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.user
+*.autosave
+build/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+QtOpencv
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+
+# IDE files
+.vscode/
+.idea/
+*.pro.user
+*.pro.user.*
+
+# OS files
+.DS_Store
+Thumbs.db

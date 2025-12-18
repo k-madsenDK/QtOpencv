@@ -175,8 +175,9 @@ void VideoWidget::showFrame(const cv::Mat& frame, int frameIdx)
             // Draw center point marker
             int centerX_px = static_cast<int>(fl.centerX * frame.cols);
             int centerY_px = static_cast<int>(fl.centerY * frame.rows);
-            cv::circle(displayFrame, cv::Point(centerX_px, centerY_px), 5, cv::Scalar(0, 255, 0), -1);
-            cv::circle(displayFrame, cv::Point(centerX_px, centerY_px), 6, cv::Scalar(255, 255, 255), 1);
+            cv::Point centerPoint(centerX_px, centerY_px);
+            cv::circle(displayFrame, centerPoint, 5, cv::Scalar(0, 255, 0), -1);
+            cv::circle(displayFrame, centerPoint, 6, cv::Scalar(255, 255, 255), 1);
         }
         annotationFrameSize = ann->size;
     } else {

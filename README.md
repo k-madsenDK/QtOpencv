@@ -10,6 +10,13 @@ This program lets you watch an MP4 video, see detection results from a Hailo-gen
 - Press **Ctrl+S** to save the current frame as `filename+framenumber.jpg`.
 - The bottom slider makes it easy to go forward and backward to the file (added 12-07-25)
 - **CompareWidget**: CompareWidget allows you to open a dedicated comparison window for side-by-side or table-based frame comparison. Launch it from the main window to compare multiple frames or images interactively.
+
+## Detection Visualization
+
+The program now displays:
+- Bounding boxes around detected objects (white rectangles)
+- Labels with confidence scores above each detection
+- **Center point markers** (green dots with white outline) showing the exact center of each detected object. The center point is calculated as the midpoint of the bounding box coordinates.
   
 ## Preparing Detection Files
 

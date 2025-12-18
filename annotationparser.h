@@ -13,6 +13,13 @@ struct FrameLabel {
     int detectionCount;
     float centerX, centerY;
     float xmin, ymin, xmax, ymax;
+    
+    // Utility function to calculate center from bounds
+    // Useful if center is not provided in input data
+    void calculateCenterFromBounds() {
+        centerX = (xmin + xmax) / 2.0f;
+        centerY = (ymin + ymax) / 2.0f;
+    }
 };
 
 struct FrameAnnotations {

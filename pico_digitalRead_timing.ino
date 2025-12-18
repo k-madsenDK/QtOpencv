@@ -106,18 +106,24 @@ void testMultipleDigitalReads() {
   interrupts();  // Re-enable interrupts
   
   totalTime = endTime - startTime;
-  float averageTime = (float)totalTime / TEST_ITERATIONS;
   
   Serial.print("  Last read value: ");
   Serial.println(lastValue);
   Serial.print("  Total time: ");
   Serial.print(totalTime);
   Serial.println(" microseconds");
-  Serial.print("  Average time per read: ");
-  Serial.print(averageTime, 3);
-  Serial.println(" microseconds");
-  Serial.print("  Reads per second: ~");
-  Serial.println((int)(1000000.0 / averageTime));
+  
+  if (TEST_ITERATIONS > 0) {
+    float averageTime = (float)totalTime / TEST_ITERATIONS;
+    Serial.print("  Average time per read: ");
+    Serial.print(averageTime, 3);
+    Serial.println(" microseconds");
+    
+    if (averageTime > 0) {
+      Serial.print("  Reads per second: ~");
+      Serial.println((int)(1000000.0 / averageTime));
+    }
+  }
   Serial.println();
 }
 

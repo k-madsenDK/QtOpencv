@@ -71,9 +71,11 @@ void loop() {
 void testSingleDigitalRead() {
   Serial.println("Test 1: Single digitalRead timing");
   
+  noInterrupts();  // Disable interrupts for precise timing
   unsigned long startTime = micros();
   int value = digitalRead(INPUT_PIN);
   unsigned long endTime = micros();
+  interrupts();  // Re-enable interrupts
   unsigned long duration = endTime - startTime;
   
   Serial.print("  digitalRead value: ");
@@ -95,11 +97,13 @@ void testMultipleDigitalReads() {
   unsigned long totalTime = 0;
   int lastValue = 0;
   
+  noInterrupts();  // Disable interrupts for precise timing
   unsigned long startTime = micros();
   for (int i = 0; i < TEST_ITERATIONS; i++) {
     lastValue = digitalRead(INPUT_PIN);
   }
   unsigned long endTime = micros();
+  interrupts();  // Re-enable interrupts
   
   totalTime = endTime - startTime;
   float averageTime = (float)totalTime / TEST_ITERATIONS;
@@ -156,15 +160,17 @@ void testDigitalReadWithChange() {
     delayMicroseconds(100);  // Small delay between reads
   }
   
-  float avgTime = (float)totalReadTime / readCount;
-  
   Serial.print("  Test complete. Changes detected: ");
   Serial.println(changeCount);
   Serial.print("  Total reads: ");
   Serial.println(readCount);
-  Serial.print("  Average read time: ");
-  Serial.print(avgTime, 3);
-  Serial.println(" microseconds");
+  
+  if (readCount > 0) {
+    float avgTime = (float)totalReadTime / readCount;
+    Serial.print("  Average read time: ");
+    Serial.print(avgTime, 3);
+    Serial.println(" microseconds");
+  }
   Serial.println();
   
   digitalWrite(LED_PIN, LOW);  // Turn off LED
